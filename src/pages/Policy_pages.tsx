@@ -14,16 +14,19 @@ const fadeUp = {
 type PolicyKey = "privacy" | "refund" | "disclaimer" | "terms" | "dns" | "tcpa";
 
 const policies: { key: PolicyKey; label: string; icon: typeof Shield; updated: string; sections: { heading: string; body: string }[] }[] = [
-  {
+{
     key: "privacy",
     label: "Privacy Policy",
     icon: Lock,
-    updated: "Updated July 2026",
+    updated: "Last Updated: July 2026",
     sections: [
-      { heading: "What we collect", body: "When you check availability at your address, we collect the information you submit — such as your zip code, name, and contact details — along with basic technical data like your browser and device type, so we can match you to accurate provider options." },
-      { heading: "How we use it", body: "Your information is used to show you accurate provider and plan availability, connect you with a provider or our support team when you request it, and improve the accuracy of our comparison results over time." },
-      { heading: "Who we share it with", body: "We share your details only with the provider(s) you express interest in, or with service partners who help us operate this site. We do not sell your personal information to unrelated third parties." },
-      { heading: "Your choices", body: "You can request a copy of the data we hold about you, ask us to correct it, or ask us to delete it at any time by contacting our support team." },
+      { heading: "Information we collect", body: "We may collect the contact details you give us (name, phone, email), your ZIP code, city, state, or service address to check availability, details about your inquiry and plan preferences, and standard website usage data such as IP address, browser/device type, pages visited, and approximate location. We also use cookies and similar tracking technologies — see our Cookie Policy for details." },
+      { heading: "How we use your information", body: "We use your information to respond to inquiries, help review available internet, TV, home phone, mobile, or bundled service options, communicate with you about availability and plans, and improve our website, customer experience, and marketing performance. We do not sell your personal information as a standalone product." },
+      { heading: "How we share information", body: "We may share your information with trusted service providers, authorized distribution partners, vendors, analytics providers, and marketing platforms involved in processing your request or improving our services. ZSolutionz LLC is an independent comparison and ordering assistance platform — we may be compensated by participating partners when you purchase an eligible service through us, at no added cost to you, but we are not affiliated with or acting on behalf of any specific provider." },
+      { heading: "Data security & retention", body: "We maintain reasonable administrative, technical, and organizational safeguards to help protect your information, though no method of transmission over the internet can be guaranteed fully secure. We retain your information only as long as reasonably necessary to provide our services, respond to inquiries, meet legal obligations, and maintain appropriate business records." },
+      { heading: "Your rights and choices", body: "Depending on your location and applicable law, you may have the right to request access to, correction of, deletion of, or restriction on certain personal information. To exercise these rights, contact us using the details below." },
+      { heading: "Children's privacy", body: "Our website and services are intended for individuals aged 16 or older. We do not knowingly collect personal information from children under the age of 16." },
+      { heading: "Existing provider accounts & questions", body: "We don't manage existing provider accounts, billing, technical support, outages, or account changes — for those, contact your provider's official support channels directly. For anything about this policy, reach ZSolutionz LLC at 259 W Broadway, 1st Floor, Waukesha, WI, call +1 (262) 399-2770, or email info@zsolutionz.com." },
     ],
   },
   {
@@ -52,12 +55,16 @@ const policies: { key: PolicyKey; label: string; icon: typeof Shield; updated: s
     key: "terms",
     label: "Terms of Service",
     icon: ScrollText,
-    updated: "Updated July 2026",
+    updated: "Last Updated: July 2026",
     sections: [
-      { heading: "Using this site", body: "By using this site, you agree to use it only to research and compare telecom services for your own personal or household use, and not to misuse, scrape, or interfere with the service." },
-      { heading: "Third-party providers", body: "Any plans, pricing, or offers you see originate from third-party providers. Your relationship and contract for service is with that provider, governed by their own terms." },
-      { heading: "Changes to these terms", body: "We may update these terms from time to time. Continuing to use the site after an update means you accept the revised terms." },
-      { heading: "Limitation of liability", body: "We provide this comparison service on an as-is basis and are not liable for losses arising from provider service issues, outages, or billing disputes between you and a provider." },
+      { heading: "Our role", body: "ZSolutionz LLC is an independent comparison and ordering assistance platform. We help customers review internet, TV, home phone, mobile, and bundled service options that may be available based on their location or complete service address." },
+      { heading: "Independent service, no affiliation", body: "We are not an internet, TV, phone, or mobile service provider, carrier, or customer support department, and we are not affiliated with, endorsed by, or acting on behalf of any specific provider. Provider names, logos, trademarks, and brand names are used solely for identification and comparison purposes and remain the property of their respective owners." },
+      { heading: "New service orders only", body: "We assist with new service inquiries and new service orders only — we do not manage existing provider accounts, billing, payments, logins, technical support, outages, repairs, cancellations, refunds, or account-related requests. For an existing service, contact your provider directly through its official support channels." },
+      { heading: "Compensation disclosure", body: "We may receive compensation from participating partners, authorized distributors, or service providers when customers purchase eligible services through our platform, at no additional cost to the customer." },
+      { heading: "Availability, pricing & provider terms", body: "Service availability, pricing, speeds, plans, promotions, installation options, equipment, contract terms, taxes, fees, and other conditions vary by provider and location, and should be confirmed before placing an order. We do not guarantee availability, pricing, speeds, promotional offers, installation schedules, provider approval, or customer eligibility — all services are subject to the selected provider's own verification process and terms." },
+      { heading: "Your responsibilities", body: "By using our website, you agree to provide accurate, up-to-date information when requesting availability or order assistance, review all provider terms and pricing before ordering, use the site only for lawful purposes, and contact your existing provider directly for account-related support." },
+      { heading: "Third-party providers & website content", body: "Our site may reference or link to third-party providers, distributors, or external websites, and we're not responsible for their services, pricing, billing, policies, or support. All content on this site is provided for general informational and comparison purposes — while we work to keep it accurate and current, we don't guarantee it is complete or error-free." },
+      { heading: "Limitation of liability & changes", body: "To the fullest extent permitted by law, ZSolutionz LLC and its affiliates, employees, partners, and representatives are not liable for indirect, incidental, consequential, special, or punitive damages arising from your use of this site or interactions with third-party providers. We may update these Terms from time to time; continued use of the site after a revision means you accept the updated Terms." },
     ],
   },
   {
@@ -95,8 +102,8 @@ export default function PoliciesPage() {
       {/* ══ HERO ════════════════════════════════════════════════ */}
       <section className="relative min-h-[65vh] flex items-center pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div style={{ background: "radial-gradient(ellipse 60% 60% at 25% 25%, rgba(99,102,241,0.35) 0%, transparent 60%)" }} className="absolute inset-0" />
-          <div style={{ background: "radial-gradient(ellipse 50% 55% at 80% 70%, rgba(168,85,247,0.25) 0%, transparent 60%)" }} className="absolute inset-0" />
+          <div style={{ background: "radial-gradient(ellipse 60% 60% at 25% 25%, rgba(37,99,235,0.35) 0%, transparent 60%)" }} className="absolute inset-0" />
+          <div style={{ background: "radial-gradient(ellipse 50% 55% at 80% 70%, rgba(56,189,248,0.25) 0%, transparent 60%)" }} className="absolute inset-0" />
           <div style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "56px 56px" }} className="absolute inset-0" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-900 to-transparent" />
         </div>
@@ -107,10 +114,10 @@ export default function PoliciesPage() {
               <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-8">
                 <Link href="/" className="hover:text-slate-200 transition-colors">Home</Link>
                 <span className="text-slate-600">/</span>
-                <span className="text-violet-300">Policies</span>
+                <span className="text-blue-300">Policies</span>
               </div>
 
-              <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-2.5 text-sm font-medium text-violet-200 mb-8">
+              <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-2.5 text-sm font-medium text-blue-200 mb-8">
                 <Shield size={14} />
                 Transparency You Can Trust
               </div>
@@ -118,7 +125,7 @@ export default function PoliciesPage() {
               <h1 className="font-extrabold text-white tracking-tight leading-[1.02] mb-6"
                 style={{ fontSize: "clamp(2.5rem, 5vw, 4.25rem)" }}>
                 Clear Terms.{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-violet-300">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-sky-300">
                   No Fine-Print Surprises.
                 </span>
               </h1>
@@ -129,7 +136,7 @@ export default function PoliciesPage() {
 
             {/* Signature: fanned document / shield cluster */}
             <div className="relative h-[320px] hidden lg:block">
-              <div style={{ background: "radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%)" }}
+              <div style={{ background: "radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)" }}
                 className="absolute inset-0 blur-2xl" />
               {[
                 { icon: Lock, rotate: -14, top: "10%", left: "8%", delay: 0 },
@@ -140,7 +147,7 @@ export default function PoliciesPage() {
               ].map((c, i) => (
                 <motion.div
                   key={i}
-                  className="absolute h-16 w-16 rounded-2xl bg-white/8 border border-white/15 backdrop-blur-md flex items-center justify-center text-violet-200 shadow-xl"
+                  className="absolute h-16 w-16 rounded-2xl bg-white/8 border border-white/15 backdrop-blur-md flex items-center justify-center text-blue-200 shadow-xl"
                   style={{ top: c.top, left: c.left, rotate: `${c.rotate}deg` }}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: [0, -10, 0] }}
@@ -153,11 +160,11 @@ export default function PoliciesPage() {
                 </motion.div>
               ))}
               <motion.div
-                className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-300/30 flex items-center justify-center"
+                className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-300/30 flex items-center justify-center"
                 animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Shield size={30} className="text-violet-200" strokeWidth={1.5} />
+                <Shield size={30} className="text-blue-200" strokeWidth={1.5} />
               </motion.div>
             </div>
           </div>
@@ -178,8 +185,8 @@ export default function PoliciesPage() {
                   onClick={() => setActive(p.key)}
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 ${
                     isActive
-                      ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-sm"
-                      : "bg-slate-50 text-slate-500 border border-slate-200 hover:border-indigo-200 hover:text-indigo-600"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "bg-slate-50 text-slate-500 border border-slate-200 hover:border-blue-200 hover:text-blue-600"
                   }`}
                 >
                   <p.icon size={15} strokeWidth={1.75} />
@@ -199,7 +206,7 @@ export default function PoliciesPage() {
               className="max-w-3xl"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white shadow-lg shadow-indigo-200 shrink-0">
+                <div className="h-14 w-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
                   <activePolicy.icon size={24} strokeWidth={1.5} />
                 </div>
                 <div>
@@ -233,7 +240,7 @@ export default function PoliciesPage() {
               Our team is happy to walk you through what any of this means for you.
             </p>
             <Link href="/contact"
-              className="inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white h-12 px-8 text-sm font-bold hover:-translate-y-0.5 transition-all">
+              className="inline-flex items-center justify-center gap-1.5 rounded-full bg-blue-600 text-white h-12 px-8 text-sm font-bold hover:bg-blue-700 hover:-translate-y-0.5 transition-all">
               Contact Us <ArrowRight size={15} />
             </Link>
           </motion.div>

@@ -10,72 +10,27 @@ const fadeUp = {
 const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.07 } } };
 
 type FaqItem = { q: string; a: string };
-type FaqGroup = { category: string; items: FaqItem[] };
 
-const faqGroups: FaqGroup[] = [
+const faqItems: FaqItem[] = [
   {
-    category: "Getting Started",
-    items: [
-      {
-        q: "Is this comparison service really free?",
-        a: "Yes. Checking your address and comparing providers costs you nothing. We're paid by our provider partners, never by you, and it never affects the prices or plans you see.",
-      },
-      {
-        q: "Do I need to enter my zip code every time?",
-        a: "Just once per visit. After you enter your zip code, we'll show you every provider available at that address so you can compare plans without re-entering it.",
-      },
-      {
-        q: "What if no providers show up for my address?",
-        a: "Coverage can vary block by block, especially in rural areas. If nothing shows up, reach out to our support team and we'll manually check for options near you.",
-      },
-    ],
+    q: "Who is ZSolutionz LLC?",
+    a: "ZSolutionz LLC operates as an independent comparison and ordering assistance platform, helping customers compare internet, TV, home phone, and mobile service options and complete new service orders.",
   },
   {
-    category: "Plans & Pricing",
-    items: [
-      {
-        q: "Are the prices I see the final price?",
-        a: "The prices shown reflect the provider's published rate for that plan. Some providers offer promotional pricing for an introductory period, which we always call out clearly before you sign up.",
-      },
-      {
-        q: "Can I bundle internet, TV, and phone together?",
-        a: "Many providers offer bundle discounts when you combine services. Look for the bundle tag on a plan, or ask our team to put together a custom bundle for your address.",
-      },
-      {
-        q: "Do any plans require a contract?",
-        a: "It depends on the provider. We clearly mark which plans are no-contract and which include a term agreement, so you always know what you're signing up for.",
-      },
-    ],
+    q: "How do I check availability and compare plans?",
+    a: "Simply enter your ZIP code or contact our team. We'll help you check available service options in your area, with final availability confirmed using your complete service address.",
   },
   {
-    category: "Signup & Installation",
-    items: [
-      {
-        q: "How do I actually sign up once I pick a plan?",
-        a: "Select a plan and our team will connect you directly with that provider to complete signup, or guide you through it ourselves depending on the provider.",
-      },
-      {
-        q: "How long does installation usually take?",
-        a: "Most internet and TV installs are scheduled within a week of signup. Fiber and cable providers often offer self-install kits that can get you online the same day.",
-      },
-      {
-        q: "Will someone need to be home for the install?",
-        a: "For most professional installs, yes, an adult needs to be present. Self-install kits, where available, skip this requirement entirely.",
-      },
-    ],
+    q: "Are prices and speeds guaranteed?",
+    a: "No. Pricing, speeds, packages, taxes, fees, promotions, and terms vary by provider and service address and are subject to confirmation before an order is placed.",
   },
   {
-    category: "Support",
-    items: [
-      {
-        q: "What if I have a problem with my provider after signing up?",
-        a: "Reach out to our support team any time. While your service contract is with the provider directly, we're happy to help you get in touch with them or escalate an issue.",
-      },
-      {
-        q: "Can I switch plans or providers later?",
-        a: "Absolutely. Come back any time to compare new plans, whether you're looking to upgrade speeds, drop a service you don't use, or switch providers entirely.",
-      },
-    ],
+    q: "Do you handle existing provider account issues?",
+    a: "No. We do not manage existing provider accounts, billing, logins, technical support, outages, or repair requests. For assistance with an existing service, please get in touch with your provider directly through their official customer support channels.",
+  },
+  {
+    q: "How is my information used?",
+    a: "The information you provide is used to help check service availability, compare available options, and assist with your service request. For more information, please review our Privacy Policy.",
   },
 ];
 
@@ -111,7 +66,7 @@ function FaqRow({ item, isOpen, onClick }: { item: FaqItem; isOpen: boolean; onC
 }
 
 export default function FAQPage() {
-  const [openKey, setOpenKey] = useState<string | null>("Getting Started-0");
+  const [openKey, setOpenKey] = useState<string | null>("0");
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
@@ -148,31 +103,24 @@ export default function FAQPage() {
         </div>
       </section>
 
-      {/* ══ FAQ GROUPS ══════════════════════════════════════════ */}
+      {/* ══ FAQ LIST ════════════════════════════════════════════ */}
       <section className="py-16 md:py-28 bg-slate-50 border-y border-slate-100">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
-          {faqGroups.map((group, gi) => (
-            <motion.div key={gi} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-              className="mb-14 last:mb-0">
-              <motion.h2 variants={fadeUp} className="text-sm font-extrabold uppercase tracking-wide text-blue-600 mb-5">
-                {group.category}
-              </motion.h2>
-              <motion.div variants={stagger} className="space-y-4">
-                {group.items.map((item, ii) => {
-                  const key = `${group.category}-${ii}`;
-                  return (
-                    <motion.div key={key} variants={fadeUp}>
-                      <FaqRow
-                        item={item}
-                        isOpen={openKey === key}
-                        onClick={() => setOpenKey(openKey === key ? null : key)}
-                      />
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </motion.div>
-          ))}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            className="space-y-4">
+            {faqItems.map((item, i) => {
+              const key = String(i);
+              return (
+                <motion.div key={key} variants={fadeUp}>
+                  <FaqRow
+                    item={item}
+                    isOpen={openKey === key}
+                    onClick={() => setOpenKey(openKey === key ? null : key)}
+                  />
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 

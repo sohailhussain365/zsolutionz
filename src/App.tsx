@@ -103,7 +103,7 @@ function Router() {
 
     <Route path="/policies">
     <PageWrapper>
-      <Policy />
+      <Policy/>
     </PageWrapper>
   </Route>
 
