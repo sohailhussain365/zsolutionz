@@ -3,7 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "wouter";
 import {
   ArrowRight, CheckCircle, Shield, Users, Clock, Heart,
-  Headphones, Globe, BarChart3, Award, TrendingUp, Star
+  Headphones, Globe, BarChart3, Award, TrendingUp, Star,
+  Search, X, Phone, MapPin,
 } from "lucide-react";
 import missionBg from "@/assets/mission-bg.png";
 import aboutTechBg from "@/assets/about-tech.png";
@@ -103,6 +104,16 @@ function ProgressBar({ value, delay = 0 }: { value: number; delay?: number }) {
 export default function HomePage() {
   const [activeService, setActiveService] = React.useState(0);
 
+  // Hero ZIP availability check
+  const [zip, setZip] = React.useState("");
+  const [showZipModal, setShowZipModal] = React.useState(false);
+  const phoneNumber = "+1-800-555-0199";
+
+  const handleZipSubmit = () => {
+    if (!zip.trim()) return;
+    setShowZipModal(true);
+  };
+
   const services = [
     { num: "01", label: "Customer Support & Service", icon: Headphones },
     { num: "02", label: "Digital Customer Acquisition", icon: Globe },
@@ -165,7 +176,7 @@ export default function HomePage() {
                 professional service, dedicated support, real results.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-12">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-8">
                 <Link href="/contact"
                   className="btn-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 text-white font-semibold text-sm h-14 px-8 hover:bg-blue-700 transition-colors shadow-sm group">
                   Get In Touch
@@ -175,6 +186,26 @@ export default function HomePage() {
                   className="inline-flex items-center justify-center gap-2.5 rounded-full border border-slate-200 text-slate-700 font-semibold text-sm h-14 px-8 hover:bg-slate-50 hover:border-slate-300 transition-all">
                   Learn More
                 </Link>
+              </motion.div>
+
+              {/* ZIP availability check */}
+              <motion.div variants={fadeUp} className="mb-10 max-w-md">
+                <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 h-14 shadow-sm">
+                  <MapPin className="text-blue-600 shrink-0" size={18} />
+                  <input
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleZipSubmit()}
+                    placeholder="Enter Your ZIP Code"
+                    className="flex-1 h-full bg-transparent outline-none text-sm text-slate-700 placeholder:text-slate-400"
+                  />
+                  <button
+                    onClick={handleZipSubmit}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 text-white font-semibold text-sm h-10 px-5 hover:bg-blue-700 transition-colors shrink-0"
+                  >
+                    Search
+                  </button>
+                </div>
               </motion.div>
 
               {/* Trust row */}
@@ -237,6 +268,53 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ══ ZIP AVAILABILITY MODAL ══════════════════════════════ */}
+      {showZipModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          onClick={() => setShowZipModal(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl"
+          >
+            <button
+              onClick={() => setShowZipModal(false)}
+              className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition-colors"
+              aria-label="Close"
+            >
+              <X size={20} />
+            </button>
+
+            <h3 className="text-xl font-bold text-slate-900 mb-6">
+              Check Availability
+            </h3>
+
+            <p className="text-center text-slate-700 mb-4">
+              Options may be available in <span className="font-bold">{zip}</span>.
+            </p>
+
+            <p className="text-center text-slate-500 text-sm mb-6">
+              Availability is subject to confirmation by full address and
+              provider coverage.
+            </p>
+
+            <a
+              href={`tel:${phoneNumber}`}
+              className="flex items-center justify-center gap-2 h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors mb-4"
+            >
+              <Phone size={16} fill="currentColor" />
+              Call to Review Options
+            </a>
+
+            <p className="text-center text-xs text-slate-400 leading-relaxed">
+              Results are estimates only. Actual availability, speeds,
+              pricing, and terms may vary.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ══ STATS STRIP ═════════════════════════════════════════ */}
       <section className="bg-slate-900 py-10 border-y border-slate-800">
