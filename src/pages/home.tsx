@@ -5,6 +5,9 @@ import {
   ArrowRight, CheckCircle, Shield, Users, Clock, Heart,
   Headphones, Globe, BarChart3, Award, TrendingUp, Star,
   Search, X, Phone, MapPin,
+  Calendar,
+  Layers,
+  ShieldCheck,
 } from "lucide-react";
 import missionBg from "@/assets/mission-bg.png";
 import aboutTechBg from "@/assets/about-tech.png";
@@ -160,7 +163,7 @@ export default function HomePage() {
             <motion.div initial="hidden" animate="visible" variants={stagger}>
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-600 mb-8">
                 <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                Internet Solutions Company · 10+ Years
+                Internet Solutions Company · 5+ Years
               </motion.div>
 
               <motion.h1 variants={fadeUp}
@@ -221,20 +224,28 @@ export default function HomePage() {
 </motion.div>
 
 
-              {/* Trust row */}
-              <motion.div variants={fadeUp} className="pt-8 border-t border-slate-100 flex flex-wrap gap-6">
-                {[
-                  { icon: Award, label: "10+ Years Experience" },
-                  { icon: Users, label: "500+ Customers" },
-                  { icon: Shield, label: "Trusted Service" },
-                ].map((b, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <b.icon size={15} className="text-blue-500" strokeWidth={1.5} />
-                    <span className="text-slate-500 text-sm font-medium">{b.label}</span>
-                  </div>
-                ))}
-              </motion.div>
-            </motion.div>
+
+{/* Trust row */}
+<motion.div variants={fadeUp} className="pt-8 border-t border-slate-100 flex flex-wrap items-center gap-x-8 gap-y-5">
+  {[
+    { icon: Award, value: "5+", label: "Years in Business" },
+    { icon: Users, value: "500+", label: "Customers Served" },
+    { icon: Shield, value: "100%", label: "Trusted Service" },
+  ].map((b, i) => (
+    <div key={i} className="flex items-center gap-3">
+      <div className="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+        <b.icon size={18} className="text-blue-600" strokeWidth={2} />
+      </div>
+      <div className="flex flex-col leading-tight">
+        <span className="text-slate-900 text-base font-bold">{b.value}</span>
+        <span className="text-slate-500 text-xs font-medium">{b.label}</span>
+      </div>
+      {i < 2 && <span className="hidden sm:block h-8 w-px bg-slate-200 ml-5" />}
+    </div>
+  ))}
+</motion.div>
+</motion.div>
+
 
             {/* RIGHT — isometric illustration */}
             <motion.div
@@ -329,25 +340,62 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ══ STATS STRIP ═════════════════════════════════════════ */}
-      <section className="bg-slate-900 py-10 border-y border-slate-800">
-        <div className="container mx-auto px-6 lg:px-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { num: "10+", label: "Years in Business" },
-              { num: "500+", label: "Customers Served" },
-              { num: "3", label: "Core Services" },
-              { num: "100%", label: "Customer Focus" },
-            ].map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.5 }}>
-                <div className="text-3xl md:text-4xl font-black text-white mb-1">{s.num}</div>
-                <div className="text-slate-400 text-sm">{s.label}</div>
-              </motion.div>
-            ))}
+
+
+{/* ══ STATS STRIP ═════════════════════════════════════════ */}
+<section className="relative bg-slate-900 py-10 md:py-12">
+  <div className="container mx-auto px-6 lg:px-16">
+    <div className="grid grid-cols-2 md:grid-cols-4">
+      {[
+        { icon: Calendar, num: "5+", unit: "yrs", label: "Years in Business" },
+        { icon: Users, num: "500", unit: "+", label: "Customers Served" },
+        { icon: Layers, num: "3", unit: "", label: "Core Services" },
+        { icon: ShieldCheck, num: "100", unit: "%", label: "Customer Focus" },
+      ].map((s, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative px-6 first:pl-0 last:pr-0 md:odd:pl-0"
+        >
+          {/* icon + eyebrow */}
+          <div className="flex items-center gap-2 mb-2.5 text-slate-500">
+            <s.icon size={13} strokeWidth={2} className="text-blue-400" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.14em]">
+              {s.label}
+            </span>
           </div>
-        </div>
-      </section>
+
+          {/* number */}
+          <div className="flex items-baseline gap-1 mb-3">
+            <span className="text-3xl md:text-4xl font-black text-white tabular-nums tracking-tight leading-none">
+              {s.num}
+            </span>
+            {s.unit && (
+              <span className="text-base md:text-lg font-bold text-blue-400 leading-none">
+                {s.unit}
+              </span>
+            )}
+          </div>
+
+          {/* ledger baseline */}
+          <div className="relative h-px w-full bg-slate-800">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 + 0.3, duration: 0.6, ease: "easeOut" }}
+              className="absolute inset-0 origin-left bg-gradient-to-r from-blue-400 to-blue-400/0"
+            />
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* ══ WHAT WE DO ══════════════════════════════════════════ */}
       <section className="py-20 md:py-32 bg-white">
@@ -445,7 +493,7 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-8">
               {[
                 { label: "Customer Satisfaction",  value: 98, display: "98%",  desc: "Customers rate our service as excellent or very good." },
-                { label: "Years of Experience",    value: 84, display: "10+",  desc: "Over a decade of professional service and industry knowledge." },
+                { label: "Years of Experience",    value: 84, display: "5+",  desc: "Over a decade of professional service and industry knowledge." },
                 { label: "Customers Served",       value: 75, display: "500+", desc: "Hundreds of satisfied customers connected to reliable solutions." },
               ].map((stat, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
