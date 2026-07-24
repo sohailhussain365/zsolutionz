@@ -53,6 +53,8 @@ export function Footer() {
               {[
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About Us" },
+                { href: "/providers", label: "Providers" },
+                { href: "/services", label: "Services" },
                 { href: "/join", label: "Join Us" },
                 { href: "/contact", label: "Contact Us" },
               ].map((link) => (
@@ -66,9 +68,9 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Services */}
+          {/* Policies */}
           <motion.div variants={fadeUp}>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6">Services</h4>
+            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6">Policies</h4>
             <ul className="space-y-3">
               {["Internet Solutions","Customer Support","Technical Assistance","Digital Acquisition","Feedback Analytics"].map((s) => (
                 <li key={s} className="text-slate-400 text-sm flex items-center gap-2">
