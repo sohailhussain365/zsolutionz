@@ -25,7 +25,6 @@ export function Footer() {
           <motion.div variants={fadeUp} className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-6">
               <img src={logoImg} alt="ZSolutionz Logo" className="h-11 w-auto" />
-              <span className="text-xl font-bold text-white tracking-tight">ZSolutionz</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-5">
               Connecting Customers With Reliable Internet Solutions. Professional service. Dedicated support. Real results.
@@ -72,10 +71,21 @@ export function Footer() {
           <motion.div variants={fadeUp}>
             <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6">Policies</h4>
             <ul className="space-y-3">
-              {["Internet Solutions","Customer Support","Technical Assistance","Digital Acquisition","Feedback Analytics"].map((s) => (
-                <li key={s} className="text-slate-400 text-sm flex items-center gap-2">
-                  <span className="h-px w-4 bg-blue-500/30" />
-                  {s}
+              {[
+                "Refund Policy",
+                "Disclaimer",
+                "Terms of Service",
+                "Do Not Sell My Info",
+                "TCPA Consent",
+              ].map((s) => (
+                <li key={s}>
+                  <Link
+                    href="/policies"
+                    className="text-slate-400 hover:text-blue-400 transition-colors text-sm flex items-center gap-2 group"
+                  >
+                    <span className="h-px w-4 bg-blue-500/0 group-hover:bg-blue-500/60 transition-all duration-300" />
+                    {s}
+                  </Link>
                 </li>
               ))}
             </ul>

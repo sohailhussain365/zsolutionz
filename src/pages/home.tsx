@@ -189,24 +189,37 @@ export default function HomePage() {
               </motion.div>
 
               {/* ZIP availability check */}
-              <motion.div variants={fadeUp} className="mb-10 max-w-md">
-                <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 h-14 shadow-sm">
-                  <MapPin className="text-blue-600 shrink-0" size={18} />
-                  <input
-                    value={zip}
-                    onChange={(e) => setZip(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleZipSubmit()}
-                    placeholder="Enter Your ZIP Code"
-                    className="flex-1 h-full bg-transparent outline-none text-sm text-slate-700 placeholder:text-slate-400"
-                  />
-                  <button
-                    onClick={handleZipSubmit}
-                    className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 text-white font-semibold text-sm h-10 px-5 hover:bg-blue-700 transition-colors shrink-0"
-                  >
-                    Search
-                  </button>
-                </div>
-              </motion.div>
+           {/* ZIP availability check */}
+{/* ZIP availability check */}
+<motion.div variants={fadeUp} className="mb-10 max-w-lg">
+  <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3 flex items-center gap-2">
+    <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
+    Check Availability In Your Area
+  </p>
+
+  <div className="flex items-center gap-3 rounded-2xl border-2 border-slate-200 bg-white pl-5 pr-2 h-16 focus-within:border-blue-600 transition-colors duration-200">
+    <MapPin className="text-blue-600 shrink-0" size={20} strokeWidth={2} />
+    <input
+      value={zip}
+      onChange={(e) => setZip(e.target.value)}
+      onKeyDown={(e) => e.key === "Enter" && handleZipSubmit()}
+      placeholder="Enter your ZIP code"
+      className="flex-1 h-full bg-transparent outline-none text-base font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal"
+    />
+    <button
+      onClick={handleZipSubmit}
+      className="inline-flex items-center gap-2 rounded-xl bg-blue-600 text-white font-semibold text-sm h-12 px-6 hover:bg-blue-700 active:scale-[0.97] transition-all duration-200 shrink-0"
+    >
+      Search
+      <ArrowRight size={16} strokeWidth={2.5} />
+    </button>
+  </div>
+
+  <p className="text-xs text-slate-500 mt-2.5 ml-1">
+    Takes 5 seconds · No commitment required
+  </p>
+</motion.div>
+
 
               {/* Trust row */}
               <motion.div variants={fadeUp} className="pt-8 border-t border-slate-100 flex flex-wrap gap-6">
