@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
   Mail, Phone, MapPin, ArrowRight, Clock,
-  MessageSquare, CheckCircle2, Loader2, Star, Shield, Users
+  MessageSquare, CheckCircle2, Loader2, Shield, Lock,
 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ContactGraphic } from "@/components/contact-graphics.tsx";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
+import mailIcon from "@/assets/mail icon .png";
 
 const FORMSPREE = "https://formspree.io/f/mwvjdbno";
 
@@ -21,7 +24,7 @@ const schema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(5, "Phone number is required"),
-  subject: z.string().min(2, "Please enter a subject"),
+  subject: z.string().min(1, "Please select a subject"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -33,6 +36,62 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } },
 };
 const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.07 } } };
+
+const SUBJECT_OPTIONS = [
+  "General Inquiry",
+  "Technical Support",
+  "Billing Question",
+  "Partnership Opportunity",
+  "Career Inquiry",
+  "Other",
+];
+
+const CONNECT_METHODS = [
+  {
+    icon: Phone,
+    title: "Call Our Team",
+    desc: "Speak with our experts for immediate assistance.",
+    linkText: "+1 (262) 399-2770",
+    href: "tel:+12623992770",
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    desc: "Send us your questions anytime.",
+    linkText: "info@zsolutionz.com",
+    href: "mailto:info@zsolutionz.com",
+  },
+  {
+    icon: MessageSquare,
+    title: "Live Chat",
+    desc: "Chat with our support team during business hours.",
+    linkText: "Available on our website",
+    href: "#",
+  },
+  {
+    icon: MapPin,
+    title: "Visit Our Office",
+    desc: "Stop by our office or send us mail.",
+    linkText: "1906 Madera St Apt 8, Waukesha, WI 53189, USA",
+    href: "#",
+  },
+  {
+    icon: Clock,
+    title: "Business Hours",
+    desc: "We're here to help during our business hours.",
+    linkText: "Mon - Sun: 8:00 AM - 9:00 PM (CT)",
+    href: "#",
+  },
+];
+
+const COMMON_INQUIRIES = [
+  "Service availability in your area",
+  "Plan comparisons and recommendations",
+  "Technical support and troubleshooting",
+  "Billing and account questions",
+  "Partnership and business opportunities",
+  "General feedback and suggestions",
+];
 
 export default function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
@@ -94,18 +153,21 @@ export default function ContactPage() {
                 Let's <span className="gradient-text">Connect</span>
               </h1>
               <p className="text-xl text-slate-500 max-w-xl leading-relaxed mb-10">
-                Reach out to our team and we'll respond promptly. Whether you have a question, need support, or want to explore working together — we're here for you.
+                We're here to help! Reach out to our team for any questions, support, or partnership opportunities.
               </p>
 
               <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: Shield, label: "Trusted Service" },
-                  { icon: Clock,  label: "24hr Response"  },
-                  { icon: Users,  label: "Expert Team"    },
+                  { icon: MessageSquare, label: "Quick Response",  sub: "Within 24 hours" },
+                  { icon: Shield,        label: "Trusted Support", sub: "Professional Team" },
+                  { icon: Phone,         label: "Customer First",  sub: "Your satisfaction matters" },
                 ].map((b, i) => (
-                  <div key={i} className="glass-card rounded-full px-5 py-2.5 flex items-center gap-2.5">
-                    <b.icon size={15} className="text-blue-500" strokeWidth={1.5} />
-                    <span className="text-slate-600 text-sm font-medium">{b.label}</span>
+                  <div key={i} className="glass-card rounded-2xl px-5 py-3 flex items-center gap-2.5">
+                    <b.icon size={16} className="text-blue-500 shrink-0" strokeWidth={1.5} />
+                    <div className="leading-tight">
+                      <div className="text-slate-800 text-sm font-semibold">{b.label}</div>
+                      <div className="text-slate-400 text-xs">{b.sub}</div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -131,20 +193,19 @@ export default function ContactPage() {
                   <span className="h-2.5 w-2.5 rounded-full bg-blue-600 z-10" />
                 </div>
               </div>
-              <ContactGraphic className="max-w-[520px] mx-auto animate-float-y relative" />
+              <img
+                src={mailIcon}
+                alt="Contact us"
+                className="max-w-[460px] w-full mx-auto animate-float-y relative"
+              />
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
                 className="absolute top-4 right-2 glass-card rounded-2xl px-5 py-4 flex items-center gap-3"
               >
-                <div className="h-10 w-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
-                  <MessageSquare size={18} className="text-white" />
-                </div>
-                <div>
-                  <div className="text-slate-900 font-bold text-sm">Quick Response</div>
-                  <div className="text-slate-500 text-xs">Within 24 hours</div>
-                </div>
+              
+              
               </motion.div>
             </motion.div>
           </div>
@@ -157,9 +218,9 @@ export default function ContactPage() {
           className="container mx-auto px-6 lg:px-16">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100">
             {[
-              { icon: Phone,  label: "Call Us",     value: "+1(262) 399-2770",  sub: "Available during business hours", href: "tel:+12623992770" },
-              { icon: Mail,   label: "Email Us",    value: "info@zsolutionz.com", sub: "We reply within 24 hours", href: "mailto:info@zsolutionz.com" },
-              { icon: MapPin, label: "Our Address", value: "Waukesha, WI 53189", sub: "1906 Madera St Apt 8, USA",  href: "#" },
+              { icon: Phone,  label: "Call Us",     value: "+1 (262) 399-2770",  sub: "Available Mon - Sun, 8:00 AM - 9:00 PM (CT)", href: "tel:+12623992770" },
+              { icon: Mail,   label: "Email Us",    value: "info@zsolutionz.com", sub: "We reply within 24 hours every business day.", href: "mailto:info@zsolutionz.com" },
+              { icon: MapPin, label: "Our Address", value: "1906 Madera St Apt 8, Waukesha, WI 53189", sub: "Serving customers across the United States.",  href: "#" },
             ].map((item, i) => (
               <motion.a key={i} variants={fadeUp} href={item.href}
                 className="flex items-center gap-6 p-10 hover:bg-white transition-all group">
@@ -186,94 +247,29 @@ export default function ContactPage() {
         <div className="container mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto">
 
-            {/* ── LEFT COLUMN ─────────────────────────── */}
+            {/* ── LEFT COLUMN: WAYS TO CONNECT ────────── */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
               className="lg:col-span-4 flex flex-col gap-5">
-              <div className="mb-4">
-                <span className="section-label">Contact Information</span>
-                <h2 className="text-2xl font-extrabold text-slate-900 mb-3">We're Here to Help</h2>
+              <div className="mb-2">
+                <h2 className="text-2xl font-extrabold text-slate-900 mb-2">Ways to Connect</h2>
                 <p className="text-slate-500 text-sm leading-relaxed">
-                  Have a question or need assistance? Our team is ready to help. Reach out through any of the channels below or use the form.
+                  Choose the method that works best for you.
                 </p>
               </div>
 
-              {/* Email */}
-              <a href="mailto:info@zsolutionz.com" data-testid="link-email"
-                className="glass-card rounded-2xl p-6 flex items-start gap-5 hover:border-blue-200 transition-all duration-300 group hover:-translate-y-0.5">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                  <Mail size={22} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-extrabold text-slate-900 mb-1">Email Us</h4>
-                  <p className="text-blue-600 text-sm group-hover:text-blue-700 transition-colors">info@zsolutionz.com</p>
-                  <p className="text-slate-400 text-xs mt-1">We reply within 24 hours</p>
-                </div>
-              </a>
-
-              {/* Phone */}
-              <a href="tel:+12623992770" data-testid="link-phone"
-                className="glass-card rounded-2xl p-6 flex items-start gap-5 hover:border-blue-200 transition-all duration-300 group hover:-translate-y-0.5">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                  <Phone size={22} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-extrabold text-slate-900 mb-1">Call Us</h4>
-                  <p className="text-blue-600 text-sm group-hover:text-blue-700 transition-colors">+1(262) 399-2770</p>
-                  <p className="text-slate-400 text-xs mt-1">Mon – Fri, 9am – 6pm CST</p>
-                </div>
-              </a>
-
-              {/* Address */}
-              <div className="glass-card rounded-2xl p-6 flex items-start gap-5">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
-                  <MapPin size={22} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-extrabold text-slate-900 mb-1">Visit Us</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed">
-                    1906 Madera St Apt 8<br />Waukesha, WI 53189<br />United States of America
-                  </p>
-                </div>
-              </div>
-
-              {/* Hours */}
-              <div className="glass-card rounded-2xl p-6 flex items-start gap-5">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
-                  <Clock size={22} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-extrabold text-slate-900 mb-2">Business Hours</h4>
-                  <div className="space-y-1">
-                    <div className="flex justify-between gap-6 text-xs">
-                      <span className="text-slate-400">Mon – Fri</span>
-                      <span className="text-slate-700 font-medium">9:00am – 6:00pm</span>
-                    </div>
-                    <div className="flex justify-between gap-6 text-xs">
-                      <span className="text-slate-400">Saturday</span>
-                      <span className="text-slate-700 font-medium">By appointment</span>
-                    </div>
-                    <div className="flex justify-between gap-6 text-xs">
-                      <span className="text-slate-400">Sunday</span>
-                      <span className="text-slate-400">Closed</span>
-                    </div>
+              {CONNECT_METHODS.map((item, i) => (
+                <a key={i} href={item.href} data-testid={`link-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="glass-card rounded-2xl p-6 flex items-start gap-5 hover:border-blue-200 transition-all duration-300 group hover:-translate-y-0.5">
+                  <div className="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 group-hover:bg-blue-700 transition-all duration-300">
+                    <item.icon size={20} strokeWidth={1.75} />
                   </div>
-                </div>
-              </div>
-
-              {/* Careers nudge */}
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <MessageSquare size={16} className="text-blue-500" />
-                  <h4 className="text-sm font-extrabold text-slate-900">Looking to Join?</h4>
-                </div>
-                <p className="text-slate-500 text-xs leading-relaxed mb-4">
-                  Interested in career opportunities? Check out our open positions.
-                </p>
-                <Link href="/join"
-                  className="inline-flex items-center gap-1.5 text-blue-600 text-xs font-bold hover:text-blue-700 transition-colors uppercase tracking-wider">
-                  View Openings <ArrowRight size={12} />
-                </Link>
-              </div>
+                  <div>
+                    <h4 className="text-sm font-extrabold text-slate-900 mb-1">{item.title}</h4>
+                    <p className="text-slate-500 text-xs mb-1.5 leading-relaxed">{item.desc}</p>
+                    <p className="text-blue-600 text-sm font-semibold group-hover:text-blue-700 transition-colors">{item.linkText}</p>
+                  </div>
+                </a>
+              ))}
             </motion.div>
 
             {/* ── RIGHT COLUMN: FORM ───────────────────── */}
@@ -291,9 +287,6 @@ export default function ContactPage() {
                       <div className="h-28 w-28 rounded-full bg-green-50 flex items-center justify-center">
                         <CheckCircle2 size={52} className="text-green-500" />
                       </div>
-                      <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
-                        <Star size={14} className="text-white" fill="currentColor" />
-                      </div>
                     </div>
                     <h3 className="text-4xl font-extrabold text-slate-900 mb-4">Message Sent!</h3>
                     <p className="text-slate-500 text-lg max-w-sm leading-relaxed">
@@ -304,9 +297,9 @@ export default function ContactPage() {
 
                 <div className="p-10 lg:p-14">
                   <div className="mb-10">
-                    <span className="section-label">Send a Message</span>
+                    <span className="section-label">Send Us a Message</span>
                     <h2 className="text-3xl font-extrabold text-slate-900 mb-3">We'd Love to Hear From You</h2>
-                    <p className="text-slate-400 text-sm">All fields are required. We'll respond within 24 hours.</p>
+                    <p className="text-slate-400 text-sm">Fill out the form below and our team will get back to you within 24 hours.</p>
                   </div>
 
                   {status === "error" && (
@@ -348,7 +341,7 @@ export default function ContactPage() {
                           <FormItem>
                             <FormLabel className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Phone Number</FormLabel>
                             <FormControl>
-                              <Input placeholder="+1 (555) 000-0000" data-testid="input-phone"
+                              <Input placeholder="(262) 123-4567" data-testid="input-phone"
                                 className="bg-slate-50 border-slate-200 text-slate-900 h-13 rounded-xl px-5 focus:border-blue-400 focus:ring-0 placeholder:text-slate-300 text-sm"
                                 {...field} />
                             </FormControl>
@@ -358,11 +351,19 @@ export default function ContactPage() {
                         <FormField control={form.control} name="subject" render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Subject</FormLabel>
-                            <FormControl>
-                              <Input placeholder="How can we help?" data-testid="input-subject"
-                                className="bg-slate-50 border-slate-200 text-slate-900 h-13 rounded-xl px-5 focus:border-blue-400 focus:ring-0 placeholder:text-slate-300 text-sm"
-                                {...field} />
-                            </FormControl>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger data-testid="select-subject"
+                                  className="bg-slate-50 border-slate-200 text-slate-900 h-13 rounded-xl px-5 focus:border-blue-400 focus:ring-0 text-sm">
+                                  <SelectValue placeholder="Select a subject" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {SUBJECT_OPTIONS.map((opt) => (
+                                  <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                             <FormMessage className="text-red-500 text-xs" />
                           </FormItem>
                         )} />
@@ -370,9 +371,9 @@ export default function ContactPage() {
 
                       <FormField control={form.control} name="message" render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Message</FormLabel>
+                          <FormLabel className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Your Message</FormLabel>
                           <FormControl>
-                            <Textarea placeholder="Tell us more about your inquiry..." data-testid="input-message"
+                            <Textarea placeholder="How can we help you?" data-testid="input-message"
                               className="bg-slate-50 border-slate-200 text-slate-900 min-h-[150px] resize-none rounded-xl p-5 focus:border-blue-400 focus:ring-0 placeholder:text-slate-300 text-sm"
                               {...field} />
                           </FormControl>
@@ -380,17 +381,17 @@ export default function ContactPage() {
                         </FormItem>
                       )} />
 
-                      <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                      <div className="pt-2">
                         <button type="submit" disabled={status === "submitting"} data-testid="button-submit"
-                          className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl text-base font-bold transition-all bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed h-14 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl text-base font-bold transition-all bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed h-14 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                           {status === "submitting" ? (
                             <><Loader2 size={18} className="animate-spin" /> Sending...</>
                           ) : (
                             <>Send Message <ArrowRight size={18} /></>
                           )}
                         </button>
-                        <p className="text-slate-400 text-xs text-center sm:text-left self-center max-w-[180px] leading-relaxed">
-                          We respect your privacy. No spam, ever.
+                        <p className="text-slate-400 text-xs text-center mt-4 flex items-center justify-center gap-1.5">
+                          <Lock size={12} /> Your information is secure and will never be shared.
                         </p>
                       </div>
                     </form>
@@ -403,24 +404,34 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ══ BOTTOM TRUST STRIP ══════════════════════════════════ */}
-      <section className="py-12 md:py-24 bg-slate-50 border-t border-slate-100">
+      {/* ══ STILL HAVE QUESTIONS / FAQ STRIP ═══════════════════ */}
+      <section className="pb-16 md:pb-32 bg-white">
         <div className="container mx-auto px-6 lg:px-16">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: Clock,         title: "Fast Response Time",  desc: "We respond to all inquiries within 24 business hours. For urgent matters, call us directly at +1(262) 399-2770." },
-              { icon: MessageSquare, title: "Career Inquiries",    desc: "Interested in joining ZSolutionz? Visit our Careers page or send your resume directly to info@zsolutionz.com." },
-              { icon: Shield,        title: "Trusted & Secure",    desc: "Your information is safe with us. We use industry-standard practices to protect your data and privacy." },
-            ].map((item, i) => (
-              <motion.div key={i} variants={fadeUp} className="glass-card rounded-2xl p-8">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-5">
-                  <item.icon size={22} strokeWidth={1.5} />
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            className="max-w-7xl mx-auto rounded-3xl bg-slate-50 border border-slate-100 p-10 lg:p-14">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+              <div className="lg:col-span-4">
+                <h3 className="text-2xl font-extrabold text-slate-900 mb-3">Still Have Questions?</h3>
+                <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                  Check out our FAQ section for quick answers to common questions.
+                </p>
+                <Link href="/faq"
+                  className="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 text-blue-600 text-sm font-bold hover:bg-blue-50 transition-colors">
+                  View FAQs <ArrowRight size={15} />
+                </Link>
+              </div>
+              <div className="lg:col-span-8">
+                <h4 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-5">Common Inquiries</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+                  {COMMON_INQUIRIES.map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 size={18} className="text-blue-600 shrink-0" />
+                      <span className="text-slate-600 text-sm">{item}</span>
+                    </div>
+                  ))}
                 </div>
-                <h3 className="text-base font-extrabold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
