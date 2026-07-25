@@ -101,7 +101,7 @@ const STEPS = [
 const STATS = [
   { icon: LayoutGrid, value: "100+", label: "Plans Compared" },
   { icon: Sparkles, value: "50+", label: "Providers Covered" },
-  { icon: Users, value: "1M+", label: "Happy Customers" },
+  { icon: Users, value: "10k+", label: "Happy Customers" },
   { icon: Clock, value: "24/7", label: "Expert Support" },
 ];
 

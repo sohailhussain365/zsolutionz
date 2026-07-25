@@ -228,8 +228,8 @@ export default function HomePage() {
 {/* Trust row */}
 <motion.div variants={fadeUp} className="pt-8 border-t border-slate-100 flex flex-wrap items-center gap-x-8 gap-y-5">
   {[
-    { icon: Award, value: "5+", label: "Years in Business" },
-    { icon: Users, value: "500+", label: "Customers Served" },
+    { icon: Award, value: "10+", label: "Years in Business" },
+    { icon: Users, value: "10k+", label: "Customers Served" },
     { icon: Shield, value: "100%", label: "Trusted Service" },
   ].map((b, i) => (
     <div key={i} className="flex items-center gap-3">
@@ -347,8 +347,8 @@ export default function HomePage() {
   <div className="container mx-auto px-6 lg:px-16">
     <div className="grid grid-cols-2 md:grid-cols-4">
       {[
-        { icon: Calendar, num: "5+", unit: "yrs", label: "Years in Business" },
-        { icon: Users, num: "500", unit: "+", label: "Customers Served" },
+        { icon: Calendar, num: "10+", unit: "yrs", label: "Years in Business" },
+        { icon: Users, num: "10k", unit: "+", label: "Customers Served" },
         { icon: Layers, num: "3", unit: "", label: "Core Services" },
         { icon: ShieldCheck, num: "100", unit: "%", label: "Customer Focus" },
       ].map((s, i) => (
@@ -493,8 +493,8 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-8">
               {[
                 { label: "Customer Satisfaction",  value: 98, display: "98%",  desc: "Customers rate our service as excellent or very good." },
-                { label: "Years of Experience",    value: 84, display: "5+",  desc: "Over a decade of professional service and industry knowledge." },
-                { label: "Customers Served",       value: 75, display: "500+", desc: "Hundreds of satisfied customers connected to reliable solutions." },
+                { label: "Years of Experience",    value: 84, display: "10+",  desc: "Over a decade of professional service and industry knowledge." },
+                { label: "Customers Served",       value: 75, display: "10k+", desc: "Hundreds of satisfied customers connected to reliable solutions." },
               ].map((stat, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.5 }}
