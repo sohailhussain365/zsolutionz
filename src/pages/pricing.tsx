@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Wifi,
   Tv,
@@ -11,43 +11,19 @@ import {
   Zap,
   Headphones,
   CheckCircle2,
-  MapPin,
   Award,
   Rocket,
-  ClipboardList,
   ListChecks,
   ArrowRight,
-  ChevronDown,
   Users,
   Clock,
   LayoutGrid,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Mail,
+  Sparkles,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
-// Static content — mirrors the reference layout section by section
+// Static content
 // ---------------------------------------------------------------------------
-
-const NAV_LINKS = [
-  { label: "Home", href: "#" },
-  { label: "Internet", href: "#internet", dropdown: true },
-  { label: "TV", href: "#tv" },
-  { label: "Mobile", href: "#mobile" },
-  { label: "Home Phone", href: "#home-phone" },
-  { label: "About Us", href: "#about" },
-  { label: "Resources", href: "#resources", dropdown: true },
-];
-
-const HERO_STATS = [
-  { icon: CheckCircle2, label: "100%", sub: "Free Comparison" },
-  { icon: Tag, label: "No", sub: "Hidden Fees" },
-  { icon: Zap, label: "Fast", sub: "Availability Check" },
-  { icon: Headphones, label: "Expert", sub: "Support" },
-];
 
 const SERVICE_CARDS = [
   {
@@ -93,11 +69,11 @@ const SERVICE_CARDS = [
 ];
 
 const PLANS = [
-  { plan: "300 Mbps", speed: "Up to 300 Mbps", start: "$45.00 /mo.", price24: "$45.00 /mo.", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited" },
-  { plan: "500 Mbps", speed: "Up to 500 Mbps", start: "$60.00 /mo.", price24: "$60.00 /mo.", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited" },
-  { plan: "1 Gig", speed: "Up to 1,000 Mbps", start: "$70.00 /mo.", price24: "$70.00 /mo.", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited" },
-  { plan: "1.2 Gig", speed: "Up to 1,200 Mbps", start: "$100.00 /mo.", price24: "$100.00 /mo.", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited" },
-  { plan: "2 Gig", speed: "Up to 2,000 Mbps", start: "$100.00 /mo.", price24: "$100.00 /mo.", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited" },
+  { plan: "300 Mbps", speed: "Up to 300 Mbps", promo: "$45.00 /mo.", regular: "$65.00 /mo. after", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited", featured: false },
+  { plan: "500 Mbps", speed: "Up to 500 Mbps", promo: "$60.00 /mo.", regular: "$80.00 /mo. after", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited", featured: false },
+  { plan: "1 Gig", speed: "Up to 1,000 Mbps", promo: "$70.00 /mo.", regular: "$90.00 /mo. after", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited", featured: true },
+  { plan: "1.2 Gig", speed: "Up to 1,200 Mbps", promo: "$100.00 /mo.", regular: "$120.00 /mo. after", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited", featured: false },
+  { plan: "2 Gig", speed: "Up to 2,000 Mbps", promo: "$100.00 /mo.", regular: "$130.00 /mo. after", contract: "24 Months", connection: "Cable or Fiber", equipment: "$15 /mo.", data: "Unlimited", featured: false },
 ];
 
 const HIGHLIGHT_PLANS = [
@@ -110,135 +86,178 @@ const TRUST_FEATURES = [
   { icon: Shield, title: "Independent Comparison", desc: "We show you multiple options so you can choose the best." },
   { icon: Tag, title: "Transparent Pricing", desc: "We display prices clearly with no hidden fees or surprises." },
   { icon: Lock, title: "Secure Information", desc: "Your data is safe, private and never sold or shared." },
-  { icon: Zap, title: "Fast & Easy", desc: "Check availability in minutes and get connected faster." },
+  { icon: Zap, title: "Fast & Easy", desc: "Browse and compare plans in minutes, no account needed." },
   { icon: Headphones, title: "Expert Support", desc: "Our specialists are here to help you every step of the way." },
   { icon: CheckCircle2, title: "No Obligation", desc: "Compare plans with absolutely no obligation to buy." },
 ];
 
 const STEPS = [
-  { icon: MapPin, title: "Enter ZIP Code", desc: "Enter your ZIP Code and we'll find services in your area." },
-  { icon: ListChecks, title: "Compare Plans", desc: "Compare speeds, prices, and features side by side." },
+  { icon: LayoutGrid, title: "Browse Plans", desc: "Explore internet, TV, mobile and home phone options in one place." },
+  { icon: ListChecks, title: "Compare Side by Side", desc: "Line up speeds, prices, and features to see what fits." },
   { icon: CheckCircle2, title: "Choose Your Plan", desc: "Pick the plan that best fits your needs and budget." },
   { icon: Rocket, title: "Get Connected", desc: "We'll connect you with the provider and get you set up." },
 ];
 
 const STATS = [
   { icon: LayoutGrid, value: "100+", label: "Plans Compared" },
-  { icon: MapPin, value: "50+", label: "Service Areas" },
+  { icon: Sparkles, value: "50+", label: "Providers Covered" },
   { icon: Users, value: "1M+", label: "Happy Customers" },
   { icon: Clock, value: "24/7", label: "Expert Support" },
 ];
 
-const FOOTER_COLUMNS = [
-  {
-    title: "Company",
-    links: ["About Us", "How It Works", "Careers", "Contact Us", "Blog"],
-  },
-  {
-    title: "Services",
-    links: ["Internet", "TV", "Mobile", "Home Phone"],
-  },
-  {
-    title: "Resources",
-    links: ["Coverage Map", "Guides", "FAQs", "Support Center"],
-  },
-  {
-    title: "Legal",
-    links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Do Not Sell My Info"],
-  },
+// Hero right-side icon panel — one tile per service, each carrying its own
+// brand color (matches the service cards below) so it reads as a system,
+// not a generic feature grid.
+const HERO_ICON_TILES = [
+  { icon: Wifi, label: "Internet", price: "from $45/mo.", bg: "bg-[#E7ECFB]", ring: "ring-[#3B4FE0]/15", color: "text-[#3B4FE0]" },
+  { icon: Tv, label: "TV", price: "from $35/mo.", bg: "bg-[#E1F6EA]", ring: "ring-[#1FA24A]/15", color: "text-[#1FA24A]" },
+  { icon: Smartphone, label: "Mobile", price: "from $25/mo.", bg: "bg-[#F2E7FB]", ring: "ring-[#8B2FD1]/15", color: "text-[#8B2FD1]" },
+  { icon: Phone, label: "Home Phone", price: "from $15/mo.", bg: "bg-[#FDEBD8]", ring: "ring-[#E8871E]/15", color: "text-[#E8871E]" },
 ];
 
 // ---------------------------------------------------------------------------
-
-function ZipInput({ dark = false }: { dark?: boolean }) {
-  const [zip, setZip] = useState("");
-  return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className={`flex w-full flex-col gap-3 sm:flex-row ${dark ? "" : "max-w-xl"}`}
-    >
-      <div className="relative flex-1">
-        <MapPin className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#3B4FE0]" />
-        <input
-          type="text"
-          inputMode="numeric"
-          value={zip}
-          onChange={(e) => setZip(e.target.value)}
-          placeholder="Enter your ZIP Code"
-          className="w-full rounded-lg border border-slate-300 bg-white py-3.5 pl-11 pr-4 text-sm font-medium text-slate-800 shadow-sm placeholder:font-normal placeholder:text-slate-400 transition hover:border-slate-400 focus:border-[#3B4FE0] focus:outline-none focus:ring-2 focus:ring-[#3B4FE0]/20"
-        />
-      </div>
-      <button
-        type="submit"
-        className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-[#3B4FE0] bg-[#3B4FE0] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#2f3fc4] hover:border-[#2f3fc4]"
-      >
-        Check Availability
-        <ArrowRight className="h-4 w-4" />
-      </button>
-    </form>
-  );
-}
 
 export default function PricingPage() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       <style>{`
-        @keyframes floatY {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+        @keyframes heroFadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes tileFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
+        .animate-hero-fade { animation: heroFadeIn 0.5s ease-out both; }
+        .stagger-2 { animation-delay: 0.1s; }
+        .tile-float { animation: tileFloat 5s ease-in-out infinite; }
       `}</style>
-  
-      {/* ---------------------------------------------------------------- */}
-      {/* Hero                                                             */}
-      {/* ---------------------------------------------------------------- */}
-      <section className="border-b border-slate-100 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-2 lg:items-center">
-          <div>
-            <span className="inline-block rounded-full bg-[#EEF0FC] px-4 py-1.5 text-xs font-semibold text-[#3B4FE0]">
-              Compare. Connect. Save.
-            </span>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
-              Find the Best Internet Plans
-              <br />
-              in <span className="text-[#3B4FE0]">Your Area</span>
-            </h1>
-            <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-slate-500">
-              Compare high-speed internet, TV, mobile and home phone plans from
-              trusted providers. Enter your ZIP Code to check availability and
-              find the best deals near you.
-            </p>
 
-            <div className="mt-7">
-              <ZipInput />
+      {/* ---------------------------------------------------------------- */}
+      {/* Hero — light theme, consistent with the rest of the page. A soft */}
+      {/* indigo-tinted background (not stark white) keeps it from feeling */}
+      {/* flat, while staying in the same light family as every other      */}
+      {/* section. Signature element: four floating icon tiles, one per    */}
+      {/* service, each in that service's own brand color — a light,       */}
+      {/* content-grounded stand-in for the old dark snapshot panel.       */}
+      {/* ---------------------------------------------------------------- */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F3F5FE] to-white">
+        {/* ambient accent glow, kept subtle for a light surface */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 right-[-8%] h-[480px] w-[480px] rounded-full opacity-30 blur-3xl"
+          style={{ background: "radial-gradient(circle, #B9C4FA 0%, transparent 70%)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-24 left-[-6%] h-[360px] w-[360px] rounded-full opacity-25 blur-3xl"
+          style={{ background: "radial-gradient(circle, #FBD9B0 0%, transparent 70%)" }}
+        />
+
+        <div className="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-24 lg:pb-28 lg:pt-28">
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+            {/* LEFT — thesis */}
+            <div className="animate-hero-fade">
+              <span className="mb-7 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#3B4FE0]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#3B4FE0]" />
+                Independent Comparison &middot; Trusted Nationwide
+              </span>
+
+              <h1
+                className="mb-6 font-extrabold leading-[1.08] tracking-tight text-slate-900"
+                style={{ fontSize: "clamp(2.5rem, 4.6vw, 3.75rem)" }}
+              >
+                The clearest way to compare
+                <span className="block text-[#3B4FE0]">
+                  internet, TV, mobile &amp; phone.
+                </span>
+              </h1>
+
+              <p className="mb-9 max-w-lg text-lg leading-relaxed text-slate-600">
+                Real prices, real speeds, side by side. No sales calls, no
+                hidden fees, no favorites — just a clear picture so you can
+                choose with confidence.
+              </p>
+
+              <div className="mb-10 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="#pricing"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#3B4FE0] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(59,79,224,0.5)] transition hover:bg-[#2f3fc4]"
+                >
+                  Compare All Plans
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#services"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  Browse Services
+                </a>
+              </div>
+
+              {/* rating line */}
+              <div className="mb-9 flex items-center gap-3">
+                <div className="flex -space-x-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <svg key={star} viewBox="0 0 20 20" className="h-4 w-4 fill-[#F5A623]">
+                      <path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1.1 5.9L10 14.7l-5.3 2.9 1.1-5.9L1.5 7.6l5.9-.7L10 1.5z" />
+                    </svg>
+                  ))}
+                </div>
+                <span className="text-sm text-slate-500">
+                  <span className="font-bold text-slate-900">4.9/5</span> from 2,000+ verified comparisons
+                </span>
+              </div>
+
+              {/* trust row */}
+              <div className="flex flex-wrap items-center gap-x-9 gap-y-5 border-t border-slate-200 pt-7">
+                {[
+                  { icon: Award, value: "100+", label: "Plans Compared" },
+                  { icon: Users, value: "1M+", label: "Happy Customers" },
+                  { icon: Shield, value: "100%", label: "Free & Unbiased" },
+                ].map((b) => (
+                  <div key={b.label} className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#EEF0FC]">
+                      <b.icon className="h-[18px] w-[18px] text-[#3B4FE0]" strokeWidth={2} />
+                    </span>
+                    <span className="flex flex-col leading-tight">
+                      <span className="text-base font-bold text-slate-900">{b.value}</span>
+                      <span className="text-xs font-medium text-slate-500">{b.label}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-y-4 sm:grid-cols-4">
-              {HERO_STATS.map(({ icon: Icon, label, sub }) => (
-                <div key={sub} className="flex items-center gap-2">
-                  <Icon className="h-4 w-4 shrink-0 text-[#3B4FE0]" />
-                  <span className="text-xs text-slate-600">
-                    <span className="block font-semibold text-slate-800">{label}</span>
-                    {sub}
+            {/* RIGHT — signature element: four brand-colored icon tiles,   */}
+            {/* one per service, gently floating at staggered offsets.     */}
+            {/* Light, airy, and grounded in the actual services compared. */}
+            <div className="animate-hero-fade stagger-2 hidden lg:block">
+              <div className="relative mx-auto grid max-w-md grid-cols-2 gap-5">
+                {HERO_ICON_TILES.map((tile, i) => (
+                  <div
+                    key={tile.label}
+                    className={`tile-float rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.15)] ${i % 2 === 1 ? "mt-8" : ""}`}
+                    style={{ animationDelay: `${i * 0.6}s` }}
+                  >
+                    <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${tile.bg} ring-4 ${tile.ring}`}>
+                      <tile.icon className={`h-6 w-6 ${tile.color}`} />
+                    </span>
+                    <div className="mt-4 text-sm font-bold text-slate-900">{tile.label}</div>
+                    <div className="mt-1 text-xs font-medium text-slate-500">{tile.price}</div>
+                  </div>
+                ))}
+
+                {/* connective badge floating in the center to tie the grid together */}
+                <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 sm:flex">
+                  <span className="flex items-center gap-2 rounded-full border border-slate-100 bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-[0_10px_30px_-10px_rgba(15,23,42,0.25)]">
+                    <Sparkles className="h-3.5 w-3.5 text-[#3B4FE0]" />
+                    All compared at once
                   </span>
                 </div>
-              ))}
+              </div>
             </div>
-
-            <div className="mt-6 flex items-center gap-2 text-xs text-slate-400">
-              <Lock className="h-3.5 w-3.5" />
-              Your information is secure and will never be shared.
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-[#EEF0FC] to-[#E4E9FB]">
-              <HeroIllustration className="aspect-[4/3] w-full" />
-            </div>
-            <FloatingIcon icon={Tv} className="left-[26%] top-[4%]" delay={0} />
-            <FloatingIcon icon={Wifi} className="left-[6%] top-[22%]" delay={0.7} />
-            <FloatingIcon icon={Smartphone} className="left-[10%] top-[46%]" delay={1.4} />
-            <FloatingIcon icon={Phone} className="left-[2%] top-[70%]" delay={2.1} />
           </div>
         </div>
       </section>
@@ -246,7 +265,13 @@ export default function PricingPage() {
       {/* ---------------------------------------------------------------- */}
       {/* Service cards                                                    */}
       {/* ---------------------------------------------------------------- */}
-      <section className="mx-auto max-w-7xl px-6 py-14">
+      <section id="services" className="mx-auto max-w-7xl scroll-mt-8 px-6 py-14">
+        <div className="mb-8 max-w-2xl">
+          <span className="text-xs font-bold uppercase tracking-wide text-[#3B4FE0]">Services</span>
+          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+            Everything you need, in one comparison
+          </h2>
+        </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICE_CARDS.map((card) => (
             <div
@@ -267,12 +292,13 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <button
+              <a
+                href="#pricing"
                 className={`mt-6 inline-flex items-center justify-center gap-2 rounded-lg ${card.buttonClass} px-4 py-3 text-sm font-semibold text-white transition`}
               >
                 {card.button}
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </a>
             </div>
           ))}
         </div>
@@ -281,20 +307,21 @@ export default function PricingPage() {
       {/* ---------------------------------------------------------------- */}
       {/* Pricing table                                                    */}
       {/* ---------------------------------------------------------------- */}
-      <section className="mx-auto max-w-7xl px-6 pb-14">
-        <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+      <section id="pricing" className="mx-auto max-w-7xl scroll-mt-8 px-6 pb-14">
+        <span className="text-xs font-bold uppercase tracking-wide text-[#3B4FE0]">Pricing</span>
+        <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
           All <span className="text-[#3B4FE0]">Internet</span> Plans and Pricing
         </h2>
         <p className="mt-2 text-sm text-slate-500">
-          Compare high-speed internet plans and prices in your area.
+          Compare high-speed internet plans and prices at a glance.
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border border-slate-100 shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[900px] border-collapse text-left text-sm">
               <thead>
-                <tr className="bg-[#0B1148] text-white">
-                  {["Plan", "Download Speed", "Starting Price*", "Price for 24 Months", "Contract", "Connection Type", "Equipment", "Data", "Availability"].map(
+                <tr className="bg-[#EEF0FC] text-slate-700">
+                  {["Plan", "Download Speed", "Promo Price*", "Price After 24 Months", "Contract", "Connection Type", "Equipment", "Data", "Status"].map(
                     (h) => (
                       <th key={h} className="whitespace-nowrap px-5 py-4 text-xs font-semibold uppercase tracking-wide">
                         {h}
@@ -307,12 +334,21 @@ export default function PricingPage() {
                 {PLANS.map((row, i) => (
                   <tr
                     key={row.plan}
-                    className={`${i % 2 === 0 ? "bg-white" : "bg-slate-50/60"} border-b border-slate-100 last:border-0`}
+                    className={`${row.featured ? "bg-[#F3F5FE]" : i % 2 === 0 ? "bg-white" : "bg-slate-50/60"} border-b border-slate-100 last:border-0`}
                   >
-                    <td className="whitespace-nowrap px-5 py-4 font-semibold text-[#3B4FE0]">{row.plan}</td>
+                    <td className="whitespace-nowrap px-5 py-4 font-semibold text-[#3B4FE0]">
+                      <span className="flex items-center gap-2">
+                        {row.plan}
+                        {row.featured && (
+                          <span className="rounded-full bg-[#3B4FE0] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                            Popular
+                          </span>
+                        )}
+                      </span>
+                    </td>
                     <td className="whitespace-nowrap px-5 py-4 text-slate-600">{row.speed}</td>
-                    <td className="whitespace-nowrap px-5 py-4 font-semibold text-slate-900">{row.start}</td>
-                    <td className="whitespace-nowrap px-5 py-4 text-slate-600">{row.price24}</td>
+                    <td className="whitespace-nowrap px-5 py-4 font-semibold text-slate-900">{row.promo}</td>
+                    <td className="whitespace-nowrap px-5 py-4 text-slate-600">{row.regular}</td>
                     <td className="whitespace-nowrap px-5 py-4 text-slate-600">{row.contract}</td>
                     <td className="whitespace-nowrap px-5 py-4 text-slate-600">{row.connection}</td>
                     <td className="whitespace-nowrap px-5 py-4 text-slate-600">{row.equipment}</td>
@@ -320,7 +356,7 @@ export default function PricingPage() {
                     <td className="whitespace-nowrap px-5 py-4">
                       <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#1FA24A]">
                         <CheckCircle2 className="h-4 w-4" />
-                        Available
+                        Active
                       </span>
                     </td>
                   </tr>
@@ -330,7 +366,7 @@ export default function PricingPage() {
           </div>
         </div>
         <p className="mt-3 text-xs text-slate-400">
-          * Availability and speed may vary by location, and prices are subject to change. See{" "}
+          * Promo pricing applies for the first 24 months. Prices are subject to change. See{" "}
           <a href="#disclaimers" className="text-[#3B4FE0] hover:underline">
             disclaimers
           </a>
@@ -359,10 +395,13 @@ export default function PricingPage() {
               </div>
               <p className="mt-1 text-xs text-slate-400">{p.term}</p>
               <p className="mt-3 text-sm text-slate-500">{p.speed}</p>
-              <button className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#3B4FE0] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#2f3fc4]">
+              <a
+                href="#pricing"
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#3B4FE0] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#2f3fc4]"
+              >
                 View Plan
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </a>
             </div>
           ))}
         </div>
@@ -390,7 +429,8 @@ export default function PricingPage() {
       {/* ---------------------------------------------------------------- */}
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="text-center">
-          <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+          <span className="text-xs font-bold uppercase tracking-wide text-[#3B4FE0]">Process</span>
+          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
             How It Works
           </h2>
           <p className="mt-2 text-sm text-slate-500">
@@ -423,36 +463,32 @@ export default function PricingPage() {
       {/* CTA banner                                                       */}
       {/* ---------------------------------------------------------------- */}
       <section className="mx-auto max-w-7xl px-6 pb-14">
-        <div className="flex flex-col items-center gap-6 rounded-2xl bg-[#3B4FE0] px-8 py-9 lg:flex-row lg:justify-between">
-          <div className="flex items-center gap-4 text-center lg:text-left">
+        <div className="flex flex-col items-center gap-6 rounded-2xl bg-[#3B4FE0] px-8 py-9 text-center lg:flex-row lg:justify-between lg:text-left">
+          <div className="flex items-center gap-4">
             <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/15 sm:flex">
-              <MapPin className="h-6 w-6 text-white" />
+              <Zap className="h-6 w-6 text-white" />
             </span>
             <div>
               <h3 className="text-lg font-bold text-white">Ready to find the best plan?</h3>
               <p className="mt-1 text-sm text-white/80">
-                Check internet, TV, mobile and home phone availability in your area today.
+                Compare internet, TV, mobile and home phone plans side by side, no forms required.
               </p>
             </div>
           </div>
-          <div className="w-full max-w-md">
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3 sm:flex-row">
-              <div className="relative flex-1">
-                <MapPin className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#3B4FE0]" />
-                <input
-                  type="text"
-                  placeholder="Enter your ZIP code"
-                  className="w-full rounded-lg border border-transparent bg-white py-3.5 pl-11 pr-4 text-sm font-medium text-slate-800 shadow-sm placeholder:font-normal placeholder:text-slate-400 transition focus:border-[#3B4FE0] focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
-              </div>
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-[#3B4FE0] bg-[#0B1148] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#070c30]"
-              >
-                Check Availability
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
+          <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row">
+            <a
+              href="#pricing"
+              className="inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white bg-white px-6 py-3.5 text-sm font-semibold text-[#3B4FE0] transition hover:bg-indigo-50"
+            >
+              Compare All Plans
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#services"
+              className="inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-white/40 bg-transparent px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Browse Services
+            </a>
           </div>
         </div>
       </section>
@@ -471,134 +507,6 @@ export default function PricingPage() {
           ))}
         </div>
       </section>
-
-   
     </div>
-  );
-}
-
-function HeroIllustration({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 560 420"
-      className={className}
-      preserveAspectRatio="xMidYMid slice"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="Illustration of a connected smart home with TV, laptop, and Wi-Fi enabled devices"
-    >
-      <defs>
-        <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F5F6FD" />
-          <stop offset="100%" stopColor="#E4E9FB" />
-        </linearGradient>
-        <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#4A5AE8" />
-          <stop offset="100%" stopColor="#2634A6" />
-        </linearGradient>
-        <linearGradient id="consoleGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="100%" stopColor="#EEF0FC" />
-        </linearGradient>
-      </defs>
-
-      {/* backdrop */}
-      <rect x="0" y="0" width="560" height="420" fill="url(#wallGrad)" />
-      {/* wall accent panel */}
-      <rect x="0" y="0" width="560" height="250" fill="#FFFFFF" opacity="0.35" />
-      {/* floor */}
-      <rect x="0" y="330" width="560" height="90" fill="#DCE1F6" />
-      <rect x="0" y="330" width="560" height="6" fill="#C7CFF2" />
-
-      {/* rug */}
-      <ellipse cx="300" cy="392" rx="230" ry="20" fill="#C7CFF2" opacity="0.6" />
-
-      {/* window */}
-      <rect x="40" y="50" width="120" height="150" rx="8" fill="#FFFFFF" stroke="#D7DCF7" strokeWidth="3" />
-      <line x1="100" y1="50" x2="100" y2="200" stroke="#D7DCF7" strokeWidth="3" />
-      <line x1="40" y1="125" x2="160" y2="125" stroke="#D7DCF7" strokeWidth="3" />
-
-      {/* console / TV stand */}
-      <rect x="230" y="300" width="230" height="60" rx="10" fill="url(#consoleGrad)" stroke="#D7DCF7" strokeWidth="2" />
-      <circle cx="250" cy="330" r="6" fill="#C7CFF2" />
-      <circle cx="440" cy="330" r="6" fill="#C7CFF2" />
-
-      {/* TV stand legs */}
-      <rect x="245" y="358" width="8" height="16" rx="2" fill="#C7CFF2" />
-      <rect x="437" y="358" width="8" height="16" rx="2" fill="#C7CFF2" />
-
-      {/* television */}
-      <rect x="255" y="165" width="180" height="112" rx="10" fill="#161B3D" />
-      <rect x="267" y="176" width="156" height="90" rx="4" fill="url(#screenGrad)" />
-      <rect x="335" y="277" width="20" height="18" fill="#161B3D" />
-      <rect x="315" y="295" width="60" height="6" rx="3" fill="#161B3D" />
-
-      {/* wifi symbol on screen */}
-      <g transform="translate(345,222)" stroke="#FFFFFF" fill="none" strokeWidth="6" strokeLinecap="round">
-        <path d="M -26 6 A 36 36 0 0 1 26 6" opacity="0.9" />
-        <path d="M -16 16 A 22 22 0 0 1 16 16" opacity="0.95" />
-        <circle cx="0" cy="28" r="5" fill="#FFFFFF" stroke="none" />
-      </g>
-
-      {/* laptop on console */}
-      <g transform="translate(255,285)">
-        <rect x="0" y="0" width="70" height="44" rx="4" fill="#161B3D" />
-        <rect x="5" y="5" width="60" height="34" rx="2" fill="#3B4FE0" />
-        <path d="M -6 44 H 76 L 68 54 H 2 Z" fill="#2B3260" />
-      </g>
-
-      {/* speaker */}
-      <rect x="405" y="286" width="20" height="34" rx="4" fill="#2B3260" />
-      <circle cx="415" cy="296" r="3.5" fill="#4A5AE8" />
-      <circle cx="415" cy="308" r="3.5" fill="#4A5AE8" />
-
-      {/* floor lamp */}
-      <g transform="translate(478,90)">
-        <path d="M 8 220 L 2 220 L 14 120 L -4 120 L 8 220" fill="#B9C2EE" />
-        <line x1="5" y1="120" x2="5" y2="40" stroke="#8C98E0" strokeWidth="4" />
-        <path d="M -22 40 L 32 40 L 20 -10 L -10 -10 Z" fill="#FFD98A" opacity="0.9" />
-      </g>
-
-      {/* plant */}
-      <g transform="translate(70,250)">
-        <path d="M -22 70 L 22 70 L 16 40 L -16 40 Z" fill="#FFFFFF" stroke="#D7DCF7" strokeWidth="2" />
-        <path d="M 0 40 C -30 30 -34 -10 -6 -18 C -8 4 -4 22 0 40 Z" fill="#3B4FE0" />
-        <path d="M 0 40 C 30 26 36 -14 8 -26 C 12 -2 6 22 0 40 Z" fill="#5A6AEE" />
-        <path d="M 0 40 C -6 14 -6 -6 0 -30 C 6 -6 6 14 0 40 Z" fill="#7C8AF2" />
-      </g>
-
-      {/* couch silhouette (foreground) */}
-      <g transform="translate(0,300)">
-        <rect x="-40" y="30" width="180" height="60" rx="16" fill="#A9B4E6" />
-        <rect x="-40" y="10" width="40" height="80" rx="14" fill="#98A4E0" />
-        <rect x="-20" y="20" width="150" height="26" rx="12" fill="#B9C2EE" />
-      </g>
-
-      {/* signal dots */}
-      <circle cx="345" cy="150" r="3" fill="#3B4FE0" opacity="0.6" />
-      <circle cx="360" cy="140" r="2" fill="#3B4FE0" opacity="0.4" />
-      <circle cx="330" cy="142" r="2" fill="#3B4FE0" opacity="0.4" />
-    </svg>
-  );
-}
-
-function FloatingIcon({
-  icon: Icon,
-  className = "",
-  delay = 0,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <span
-      className={`absolute flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-white to-[#EEF0FC] shadow-[0_10px_24px_rgba(59,79,224,0.22)] ring-1 ring-white/70 ${className}`}
-      style={{ animation: "floatY 4.5s ease-in-out infinite", animationDelay: `${delay}s` }}
-    >
-      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#3B4FE0]/10">
-        <Icon className="h-5 w-5 text-[#3B4FE0]" strokeWidth={2.1} />
-      </span>
-    </span>
   );
 }
