@@ -214,7 +214,7 @@ export default function PricingPage() {
               <div className="flex flex-wrap items-center gap-x-9 gap-y-5 border-t border-slate-200 pt-7">
                 {[
                   { icon: Award, value: "100+", label: "Plans Compared" },
-                  { icon: Users, value: "1M+", label: "Happy Customers" },
+                  { icon: Users, value: "10k+", label: "Happy Customers" },
                   { icon: Shield, value: "100%", label: "Free & Unbiased" },
                 ].map((b) => (
                   <div key={b.label} className="flex items-center gap-3">
