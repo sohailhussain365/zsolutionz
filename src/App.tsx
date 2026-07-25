@@ -17,6 +17,7 @@ import FAQPage from "@/pages/faq";
 
 import Policy from "@/pages/Policy_pages";
 import Services from "@/pages/services";
+import PricingPage from "@/pages/pricing";
 
 const queryClient = new QueryClient();
 
@@ -107,6 +108,11 @@ function Router() {
     </PageWrapper>
   </Route>
 
+  <Route path="/pricing">
+    <PageWrapper>
+      <PricingPage />
+    </PageWrapper>
+  </Route>
 
 
   <Route>

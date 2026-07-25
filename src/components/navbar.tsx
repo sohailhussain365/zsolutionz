@@ -30,11 +30,12 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
     { href: "/services", label: "Services" },
-    { href: "/providers", label: "providers" },
-    { href: "/how-it-works", label: "How It Works" },
+      { href: "/pricing", label: "Pricing" },
+     { href: "/how-it-works", label: "How It Works" },
     { href: "/faq", label: "FAQ" },
     { href: "/policies", label: "Policies" },
     { href: "/join", label: "Join Us" },
+    
   ];
 
   const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];

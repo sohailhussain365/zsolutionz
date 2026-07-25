@@ -72,7 +72,7 @@ const CONNECT_METHODS = [
     icon: MapPin,
     title: "Visit Our Office",
     desc: "Stop by our office or send us mail.",
-    linkText: "1906 Madera St Apt 8, Waukesha, WI 53189, USA",
+    linkText: "259 W Broadway, 1st Floor, Waukesha, WI, USA",
     href: "#",
   },
   {
@@ -220,7 +220,7 @@ export default function ContactPage() {
             {[
               { icon: Phone,  label: "Call Us",     value: "+1 (262) 399-2770",  sub: "Available Mon - Sun, 8:00 AM - 9:00 PM (CT)", href: "tel:+12623992770" },
               { icon: Mail,   label: "Email Us",    value: "info@zsolutionz.com", sub: "We reply within 24 hours every business day.", href: "mailto:info@zsolutionz.com" },
-              { icon: MapPin, label: "Our Address", value: "1906 Madera St Apt 8, Waukesha, WI 53189", sub: "Serving customers across the United States.",  href: "#" },
+              { icon: MapPin, label: "Our Address", value: "259 W Broadway, 1st Floor, Waukesha, WI, USA", sub: "Serving customers across the United States.",  href: "#" },
             ].map((item, i) => (
               <motion.a key={i} variants={fadeUp} href={item.href}
                 className="flex items-center gap-6 p-10 hover:bg-white transition-all group">

@@ -95,9 +95,9 @@ export function ContactSection() {
               <div>
                 <h4 className="text-lg font-bold text-white mb-1">Visit Us</h4>
                 <p className="text-muted-foreground leading-relaxed">
-                  1906 Madera St Apt 8,<br />
-                  Waukesha, WI 53189,<br />
-                  United States of America
+                  259 W Broadway,<br />
+                  1st Floor, Waukesha,<br />
+                   WI, USA
                 </p>
               </div>
             </div>

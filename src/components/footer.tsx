@@ -52,7 +52,7 @@ export function Footer() {
               {[
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About Us" },
-                { href: "/providers", label: "Providers" },
+                { href: "/pricing", label: "Pricing" },
                 { href: "/services", label: "Services" },
                 { href: "/join", label: "Join Us" },
                 { href: "/contact", label: "Contact Us" },
@@ -123,7 +123,7 @@ export function Footer() {
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 mb-0.5">Address</div>
-                  <div className="text-sm leading-relaxed">1906 Madera St Apt 8<br />Waukesha, WI 53189<br />United States</div>
+                  <div className="text-sm leading-relaxed">259 W Broadway<br />1st Floor, Waukesha<br /> WI, USA</div>
                 </div>
               </li>
             </ul>
