@@ -163,7 +163,7 @@ export default function HomePage() {
             <motion.div initial="hidden" animate="visible" variants={stagger}>
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-600 mb-8">
                 <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                Internet Solutions Company · 5+ Years
+                Internet Solutions Company · 10+ Years
               </motion.div>
 
               <motion.h1 variants={fadeUp}
