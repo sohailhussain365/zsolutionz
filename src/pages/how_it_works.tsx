@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
   MapPin, ListChecks, PhoneCall, ClipboardCheck, ChevronRight,
-  ShieldCheck, ArrowRight, Lock,
+  ShieldCheck, ArrowRight, Lock, Sparkles,
 } from "lucide-react";
 
 const fadeUp = {

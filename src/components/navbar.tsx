@@ -71,9 +71,7 @@ export function Navbar() {
               whileHover={{ scale: 1.08, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             />
-            <span className="text-lg font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 group-hover:from-indigo-600 group-hover:to-violet-600 transition-all duration-300">
-              ZSolutionz
-            </span>
+          
           </Link>
 
           {/* Desktop nav */}

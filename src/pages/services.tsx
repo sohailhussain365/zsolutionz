@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import {
   Wifi, Tv, Phone, Smartphone, ArrowRight,
   ShieldCheck, DollarSign, Headphones, Lock,
+  Award, Users, LayoutGrid,
 } from "lucide-react";
 
 const fadeUp = {
@@ -35,38 +36,58 @@ const trustItems = [
 export default function ServicesPage() {
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      <section className="relative bg-slate-50/60 pt-32 pb-20 md:pt-40 md:pb-24">
+      <section className="relative bg-slate-50/60 pt-20 pb-14 md:pt-24 md:pb-16">
         <div className="container mx-auto px-6 lg:px-16">
 
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-8">
+          <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-5">
             <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
             <span className="text-slate-300">/</span>
             <span className="text-blue-600 font-semibold">Services</span>
           </div>
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-600 mb-8">
-            <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-blue-50 px-3.5 py-1 text-xs sm:text-sm font-medium text-blue-600 mb-5">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse" />
             Everything Under One Roof
           </div>
 
           {/* Headline + intro */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-8">
             <h1 className="font-black text-slate-900 tracking-tight leading-[1.05]"
-              style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.6rem)" }}>
+              style={{ fontSize: "clamp(2rem, 3.8vw, 3rem)" }}>
               Services You<br />Can <span className="text-blue-600">Compare</span>
             </h1>
-            <p className="text-slate-500 text-lg leading-relaxed lg:pt-3">
+            <p className="text-slate-500 text-lg leading-relaxed lg:pt-2">
               ZSolutionz helps you compare top Internet, TV, Home Phone, and Mobile plans from trusted providers in one simple place.
             </p>
+          </div>
+
+          {/* Quick stats — fills the space between the intro and the service cards */}
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 border-y border-slate-200 py-5 mb-10">
+            {[
+              { icon: LayoutGrid, value: "4", label: "Core Services" },
+              { icon: Users, value: "500+", label: "Customers Served" },
+              { icon: Award, value: "10+", label: "Years in Business" },
+            ].map((b, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-blue-100/70 flex items-center justify-center shrink-0">
+                  <b.icon size={18} className="text-blue-600" strokeWidth={2} />
+                </div>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-slate-900 text-base font-bold">{b.value}</span>
+                  <span className="text-slate-500 text-xs font-medium">{b.label}</span>
+                </div>
+                {i < 2 && <span className="hidden sm:block h-8 w-px bg-slate-200 ml-5" />}
+              </div>
+            ))}
           </div>
 
          
 
 {/* Service cards */}
 <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
   {services.map((s, i) => {
     const c = colorMap[s.color];
     return (
@@ -77,7 +98,7 @@ export default function ServicesPage() {
         </div>
         <h3 className="text-lg font-extrabold text-slate-900 mb-2">{s.title}</h3>
         <p className="text-sm text-slate-500 leading-relaxed mb-6">{s.desc}</p>
-        <Link href="/providers"
+        <Link href="/contact"
           className={`inline-flex items-center gap-1.5 text-sm font-bold ${c.text} group-hover:gap-2.5 transition-all mt-auto`}>
           Learn More <ArrowRight size={14} />
         </Link>

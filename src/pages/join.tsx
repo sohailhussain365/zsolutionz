@@ -17,7 +17,7 @@ export default function JoinPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative min-h-[75vh] flex items-center pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden bg-white">
+      <section className="relative flex items-center pb-10 pt-24 md:pb-14 md:pt-28 overflow-hidden bg-white">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div style={{ background: "radial-gradient(ellipse 60% 70% at 75% 35%, rgba(37,99,235,0.10) 0%, transparent 65%)" }} className="absolute inset-0" />
           {/* Diagonal ascending lines — a "growth trajectory" motif unique to Join */}
@@ -33,20 +33,20 @@ export default function JoinPage() {
         <div className="container relative z-10 mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-400 mb-7">
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-400 mb-6">
                 <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
                 <span className="text-slate-300">/</span>
                 <span className="text-blue-500">Join Us</span>
               </div>
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-green-200 bg-green-50 px-5 py-2.5 text-sm font-medium text-green-700 mb-7">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-green-200 bg-green-50 px-5 py-2 text-sm font-medium text-green-700 mb-6">
                 <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                 We Are Hiring — 3 Open Roles
               </div>
-              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.03] mb-6" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
+              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4" style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
                 Build Your Career<br />With{" "}
                 <span className="gradient-text">ZSolutionz</span>
               </h1>
-              <p className="text-xl text-slate-500 max-w-2xl leading-relaxed mb-10">
+              <p className="text-lg md:text-xl text-slate-500 max-w-2xl leading-relaxed mb-8">
                 We are looking for motivated individuals who want to grow with us. Join a team that values your skills, supports your development, and rewards your hard work.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -100,11 +100,11 @@ export default function JoinPage() {
       </section>
 
       {/* ── WHY WORK WITH US ────────────────────────────────── */}
-      <section className="py-16 md:py-32 bg-white relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <span className="section-label">Why ZSolutionz</span>
-            <h2 className="font-extrabold text-slate-900 mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Why Work With Us</h2>
+            <h2 className="font-extrabold text-slate-900 mb-4" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Why Work With Us</h2>
             <p className="text-slate-500 text-lg">We're not just offering jobs — we're offering careers. Here's what makes ZSolutionz a place where people thrive.</p>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -114,11 +114,11 @@ export default function JoinPage() {
               { icon: Laptop,     title: "Remote Flexibility",      desc: "Work from wherever you thrive. Our distributed team model gives you the freedom and flexibility to deliver your best work from anywhere." },
             ].map((benefit, i) => (
               <motion.div key={i} variants={fadeUp}
-                className="glass-card-shimmer rounded-3xl p-10 group hover:border-blue-200 hover:shadow-md transition-all duration-500 relative overflow-hidden">
-                <div className="h-16 w-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                className="glass-card-shimmer rounded-3xl p-8 group hover:border-blue-200 hover:shadow-md transition-all duration-500 relative overflow-hidden">
+                <div className="h-16 w-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                   <benefit.icon size={30} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 mb-4">{benefit.title}</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-3">{benefit.title}</h3>
                 <p className="text-slate-500 leading-relaxed text-sm">{benefit.desc}</p>
               </motion.div>
             ))}
@@ -127,19 +127,19 @@ export default function JoinPage() {
       </section>
 
       {/* ── TEAM CULTURE ───────────────────────────────────── */}
-      <section className="py-16 md:py-32 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Our Culture</span>
-              <h2 className="font-extrabold text-slate-900 leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
+              <h2 className="font-extrabold text-slate-900 leading-tight mb-6" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
                 A Culture Built on<br />
                 <span className="gradient-text">Trust &amp; Growth</span>
               </h2>
-              <p className="text-slate-500 text-lg leading-relaxed mb-6">
+              <p className="text-slate-500 text-lg leading-relaxed mb-4">
                 At ZSolutionz, we believe that our team is our greatest asset. We foster an environment where every voice is heard, every contribution is valued, and every person has the opportunity to grow.
               </p>
-              <p className="text-slate-500 text-lg leading-relaxed mb-10">
+              <p className="text-slate-500 text-lg leading-relaxed mb-8">
                 Whether you're starting your career or bringing years of experience, you'll find a team that supports you, challenges you, and celebrates your success.
               </p>
               <div className="grid grid-cols-2 gap-4">
@@ -175,11 +175,11 @@ export default function JoinPage() {
       </section>
 
       {/* ── OPEN POSITIONS ──────────────────────────────────── */}
-      <section id="openings" className="py-16 md:py-32 bg-white relative overflow-hidden">
+      <section id="openings" className="py-14 md:py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <span className="section-label">Careers</span>
-            <h2 className="font-extrabold text-slate-900 mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Current Openings</h2>
+            <h2 className="font-extrabold text-slate-900 mb-4" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Current Openings</h2>
             <p className="text-slate-500 text-lg">Explore our open positions and find the role that matches your skills and ambitions.</p>
           </motion.div>
 
@@ -231,7 +231,7 @@ export default function JoinPage() {
                 </div>
                 <p className="text-slate-500 leading-relaxed mb-6 text-sm flex-grow">{job.desc}</p>
 
-                <ul className="space-y-2.5 mb-8">
+                <ul className="space-y-2.5 mb-6">
                   {job.perks.map((perk, j) => (
                     <li key={j} className="flex items-center gap-2.5 text-sm text-slate-600">
                       <CheckCircle size={14} className="text-blue-500 shrink-0" />
@@ -252,11 +252,11 @@ export default function JoinPage() {
       </section>
 
       {/* ── BENEFITS GRID ───────────────────────────────────── */}
-      <section className="py-14 md:py-28 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
+      <section className="py-12 md:py-20 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-10 md:mb-20">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
             <span className="section-label">Employee Benefits</span>
-            <h2 className="font-extrabold text-slate-900 mb-6" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)" }}>What You Can Expect</h2>
+            <h2 className="font-extrabold text-slate-900 mb-4" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)" }}>What You Can Expect</h2>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
@@ -283,16 +283,16 @@ export default function JoinPage() {
       </section>
 
       {/* ── APPLICATION CTA ─────────────────────────────────── */}
-      <section className="py-14 md:py-28 bg-blue-600">
+      <section className="py-12 md:py-20 bg-blue-600">
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <span className="inline-flex items-center gap-2 text-blue-200 text-xs font-bold uppercase tracking-wider mb-6">
               <span className="h-px w-6 bg-blue-300" /> Get Started
             </span>
-            <h2 className="font-extrabold text-white mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
+            <h2 className="font-extrabold text-white mb-4" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
               Ready to Join the Team?
             </h2>
-            <p className="text-blue-100 text-lg max-w-xl mx-auto mb-10">
+            <p className="text-blue-100 text-lg max-w-xl mx-auto mb-8">
               Send your resume to info@zsolutionz.com or reach out through our contact form. We'll be in touch soon.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

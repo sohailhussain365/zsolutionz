@@ -7,6 +7,17 @@ import { FaLinkedinIn, FaFacebook } from "react-icons/fa";
 const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.07 } } };
 
+// Keys must match the `key` values used in policies-page.tsx so these links
+// deep-link straight into the right tab via /policies?tab=<key>.
+const policyLinks: { label: string; key: string }[] = [
+  { label: "Privacy Policy", key: "privacy" },
+  { label: "Refund Policy", key: "refund" },
+  { label: "Disclaimer", key: "disclaimer" },
+  { label: "Terms of Service", key: "terms" },
+  { label: "Do Not Sell My Info", key: "dns" },
+  { label: "TCPA Consent", key: "tcpa" },
+];
+
 export function Footer() {
   return (
     <footer className="bg-slate-900 border-t border-slate-800 relative overflow-hidden">
@@ -71,20 +82,14 @@ export function Footer() {
           <motion.div variants={fadeUp}>
             <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-6">Policies</h4>
             <ul className="space-y-3">
-              {[
-                "Refund Policy",
-                "Disclaimer",
-                "Terms of Service",
-                "Do Not Sell My Info",
-                "TCPA Consent",
-              ].map((s) => (
-                <li key={s}>
+              {policyLinks.map((p) => (
+                <li key={p.key}>
                   <Link
-                    href="/policies"
+                    href={`/policies?tab=${p.key}`}
                     className="text-slate-400 hover:text-blue-400 transition-colors text-sm flex items-center gap-2 group"
                   >
                     <span className="h-px w-4 bg-blue-500/0 group-hover:bg-blue-500/60 transition-all duration-300" />
-                    {s}
+                    {p.label}
                   </Link>
                 </li>
               ))}
@@ -139,9 +144,13 @@ export function Footer() {
         >
           <p>Copyright &copy; 2026 ZSolutionz. All Rights Reserved.</p>
           <div className="flex items-center gap-6">
-            <span className="hover:text-blue-400 transition-colors cursor-pointer">Privacy Policy</span>
+            <Link href="/policies?tab=privacy" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Privacy Policy
+            </Link>
             <span className="h-4 w-px bg-slate-700" />
-            <span className="hover:text-blue-400 transition-colors cursor-pointer">Terms &amp; Conditions</span>
+            <Link href="/policies?tab=terms" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Terms &amp; Conditions
+            </Link>
           </div>
         </motion.div>
       </div>

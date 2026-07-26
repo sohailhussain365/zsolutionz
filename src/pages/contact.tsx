@@ -127,7 +127,7 @@ export default function ContactPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ══ HERO ════════════════════════════════════════════════ */}
-      <section className="relative min-h-[75vh] flex items-center pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden bg-white">
+      <section className="relative flex items-center pb-10 pt-24 md:pb-14 md:pt-28 overflow-hidden bg-white">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div style={{ background: "radial-gradient(ellipse 60% 60% at 75% 40%, rgba(37,99,235,0.10) 0%, transparent 60%)" }} className="absolute inset-0" />
           <div style={{ backgroundImage: "linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px)", backgroundSize: "64px 64px" }} className="absolute inset-0" />
@@ -137,22 +137,22 @@ export default function ContactPage() {
         <div className="container relative z-10 mx-auto px-6 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-8">
+              <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-6">
                 <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
                 <span className="text-slate-300">/</span>
                 <span className="text-blue-500">Contact Us</span>
               </div>
 
-              <div className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-600 mb-8">
+              <div className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-600 mb-6">
                 <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
                 We'd Love to Hear From You
               </div>
 
-              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.02] mb-6"
-                style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
+              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4"
+                style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
                 Let's <span className="gradient-text">Connect</span>
               </h1>
-              <p className="text-xl text-slate-500 max-w-xl leading-relaxed mb-10">
+              <p className="text-lg md:text-xl text-slate-500 max-w-xl leading-relaxed mb-8">
                 We're here to help! Reach out to our team for any questions, support, or partnership opportunities.
               </p>
 
@@ -223,7 +223,7 @@ export default function ContactPage() {
               { icon: MapPin, label: "Our Address", value: "259 W Broadway, 1st Floor, Waukesha, WI, USA", sub: "Serving customers across the United States.",  href: "#" },
             ].map((item, i) => (
               <motion.a key={i} variants={fadeUp} href={item.href}
-                className="flex items-center gap-6 p-10 hover:bg-white transition-all group">
+                className="flex items-center gap-6 p-8 hover:bg-white transition-all group">
                 <div className="h-14 w-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                   <item.icon size={26} strokeWidth={1.5} />
                 </div>
@@ -239,7 +239,7 @@ export default function ContactPage() {
       </section>
 
       {/* ══ MAIN CONTACT LAYOUT ═════════════════════════════════ */}
-      <section className="py-16 md:py-32 bg-white relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-white relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50 rounded-full blur-3xl opacity-60" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-50 rounded-full blur-3xl opacity-40" />
@@ -295,8 +295,8 @@ export default function ContactPage() {
                   </motion.div>
                 )}
 
-                <div className="p-10 lg:p-14">
-                  <div className="mb-10">
+                <div className="p-8 lg:p-10">
+                  <div className="mb-8">
                     <span className="section-label">Send Us a Message</span>
                     <h2 className="text-3xl font-extrabold text-slate-900 mb-3">We'd Love to Hear From You</h2>
                     <p className="text-slate-400 text-sm">Fill out the form below and our team will get back to you within 24 hours.</p>
@@ -405,10 +405,10 @@ export default function ContactPage() {
       </section>
 
       {/* ══ STILL HAVE QUESTIONS / FAQ STRIP ═══════════════════ */}
-      <section className="pb-16 md:pb-32 bg-white">
+      <section className="pb-14 md:pb-20 bg-white">
         <div className="container mx-auto px-6 lg:px-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="max-w-7xl mx-auto rounded-3xl bg-slate-50 border border-slate-100 p-10 lg:p-14">
+            className="max-w-7xl mx-auto rounded-3xl bg-slate-50 border border-slate-100 p-8 lg:p-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
               <div className="lg:col-span-4">
                 <h3 className="text-2xl font-extrabold text-slate-900 mb-3">Still Have Questions?</h3>

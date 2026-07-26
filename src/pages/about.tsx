@@ -22,7 +22,7 @@ export default function AboutPage() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
  {/* ── HERO ─────────────────────────────────────────────── */}
-<section className="relative min-h-[75vh] flex items-center pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden bg-white">
+<section className="relative min-h-[60vh] flex items-center pb-12 pt-20 md:pb-14 md:pt-24 overflow-hidden bg-white">
   <div className="absolute inset-0 z-0 pointer-events-none">
     <div style={{ background: "radial-gradient(ellipse 60% 70% at 75% 35%, rgba(37,99,235,0.10) 0%, transparent 65%)" }} className="absolute inset-0" />
     <div
@@ -35,25 +35,25 @@ export default function AboutPage() {
   </div>
 
   <div className="container relative z-10 mx-auto px-6 lg:px-12">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <div className="flex items-center gap-2 text-xs font-medium text-slate-400 mb-7">
+        <div className="flex items-center gap-2 text-xs font-medium text-slate-400 mb-4">
           <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
           <span className="text-slate-300">/</span>
           <span className="text-blue-500">About Us</span>
         </div>
-        <div className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-600 mb-7">
-          <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+        <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-blue-50 px-3.5 py-1 text-xs sm:text-sm font-medium text-blue-600 mb-5">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse" />
           Who We Are
         </div>
-        <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.03] mb-6" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
+        <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4" style={{ fontSize: "clamp(2.2rem, 4.2vw, 3.5rem)" }}>
           About{" "}
           <span className="gradient-text">ZSolutionz</span>
         </h1>
-        <p className="text-xl text-slate-500 max-w-2xl leading-relaxed mb-10">
+        <p className="text-lg text-slate-500 max-w-2xl leading-relaxed mb-6">
           An independent comparison platform helping customers explore and compare internet, TV, home phone, and mobile service options available in their area.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <Link href="/contact"
             className="btn-glow inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 text-white font-semibold h-14 px-8 hover:bg-blue-700 transition-all">
             Contact Us <ArrowRight size={18} />
@@ -62,6 +62,25 @@ export default function AboutPage() {
             className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 text-slate-700 font-semibold h-14 px-8 hover:bg-slate-50 hover:border-slate-300 transition-all">
             Join Our Team
           </Link>
+        </div>
+
+        <div className="pt-5 border-t border-slate-100 flex flex-wrap items-center gap-x-8 gap-y-4">
+          {[
+            { icon: Award, value: "10+", label: "Years in Business" },
+            { icon: Users, value: "500+", label: "Customers Served" },
+            { icon: CheckCircle, value: "100%", label: "Independent & Unbiased" },
+          ].map((b, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                <b.icon size={18} className="text-blue-600" strokeWidth={2} />
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-slate-900 text-base font-bold">{b.value}</span>
+                <span className="text-slate-500 text-xs font-medium">{b.label}</span>
+              </div>
+              {i < 2 && <span className="hidden sm:block h-8 w-px bg-slate-200 ml-5" />}
+            </div>
+          ))}
         </div>
       </motion.div>
 
@@ -108,12 +127,12 @@ export default function AboutPage() {
 
 
       {/* ── WHO WE ARE ──────────────────────────────────────── */}
-      <section className="py-16 md:py-32 bg-white relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Who We Are</span>
-              <h2 className="font-extrabold text-slate-900 leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
+              <h2 className="font-extrabold text-slate-900 leading-tight mb-5" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
                 Connecting People With<br />
                 <span className="gradient-text">Trusted Comparisons</span>
               </h2>
@@ -122,7 +141,7 @@ export default function AboutPage() {
                 <p>We provide comparison information and order assistance for a variety of service providers. All provider names, logos, trademarks, and brand names are the property of their respective owners and are used solely for identification and comparison purposes. ZSolutionz LLC is not affiliated with, endorsed by, or acting on behalf of any specific provider, and we do not guarantee service availability, pricing, promotions, or installation timelines, as these may vary by location and provider.</p>
                 <p>We may receive compensation from participating partners, authorized distributors, or service providers when customers purchase eligible services through our platform. This results in no additional cost to the customer. Our services are limited to new service inquiries and orders — we don't have access to existing customer accounts and can't assist with billing, technical support, outages, repairs, account changes, password resets, or cancellations. For those, customers should contact their provider directly.</p>
               </div>
-              <div className="mt-10 grid grid-cols-2 gap-5">
+              <div className="mt-7 grid grid-cols-2 gap-5">
                 {[
                   { num: 10, suffix: "+", label: "Years of Experience" },
                   { num: 500, suffix: "+", label: "Customers Served" },
@@ -159,16 +178,16 @@ export default function AboutPage() {
       </section>
 
       {/* ── MISSION ─────────────────────────────────────────── */}
-      <section className="py-16 md:py-32 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-slate-50 border-y border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
               <span className="section-label">Our Mission</span>
-              <h2 className="font-extrabold text-slate-900 leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
+              <h2 className="font-extrabold text-slate-900 leading-tight mb-5" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
                 Customer-inspired.<br />
                 <span className="gradient-text">Client Driven.</span>
               </h2>
-              <p className="text-slate-500 text-lg leading-relaxed mb-10">
+              <p className="text-slate-500 text-lg leading-relaxed mb-6">
                 Help customers navigate the crowded world of internet, TV, home phone, and mobile services with clear, independent comparisons — so they can make informed decisions with confidence, backed by responsive order assistance every step of the way.
               </p>
               <motion.ul initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-3">
@@ -204,11 +223,11 @@ export default function AboutPage() {
       </section>
 
       {/* ── VISION / MISSION / PURPOSE ──────────────────────── */}
-      <section className="py-16 md:py-32 bg-white relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
             <span className="section-label">Our Foundation</span>
-            <h2 className="font-extrabold text-slate-900 mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Vision, Mission &amp; Purpose</h2>
+            <h2 className="font-extrabold text-slate-900 mb-4" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)" }}>Vision, Mission &amp; Purpose</h2>
             <p className="text-slate-500 text-lg">Three pillars that guide every decision we make and every customer we serve.</p>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -231,11 +250,11 @@ export default function AboutPage() {
       </section>
 
       {/* ── CORE VALUES ─────────────────────────────────────── */}
-      <section className="py-16 md:py-32 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-12 md:mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
             <span className="section-label">What We Stand For</span>
-            <h2 className="font-extrabold text-slate-900 mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>Our Core Values</h2>
+            <h2 className="font-extrabold text-slate-900 mb-4" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)" }}>Our Core Values</h2>
             <p className="text-slate-500 text-lg">The principles that define our culture and guide our work every day.</p>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -260,13 +279,13 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ─────────────────────────────────────────────── */}
-      <section className="py-12 md:py-24 bg-blue-600">
+      <section className="py-10 md:py-16 bg-blue-600">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center">
-            <h2 className="font-extrabold text-white mb-4" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+            <h2 className="font-extrabold text-white mb-3" style={{ fontSize: "clamp(1.6rem, 3vw, 2.3rem)" }}>
               Ready to Work With Us?
             </h2>
-            <p className="text-blue-100 text-lg max-w-xl mx-auto mb-10">
+            <p className="text-blue-100 text-lg max-w-xl mx-auto mb-7">
               Get in touch today and let ZSolutionz help you compare service options and find the plan that fits your needs.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

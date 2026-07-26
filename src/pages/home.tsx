@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
   ArrowRight, CheckCircle, Shield, Users, Clock, Heart,
@@ -87,22 +87,6 @@ function ServiceIllustration() {
   );
 }
 
-/* ─── Animated Progress Bar ───────────────────────────── */
-function ProgressBar({ value, delay = 0 }: { value: number; delay?: number }) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-  return (
-    <div ref={ref} className="h-2 w-full rounded-full bg-blue-200/60 overflow-hidden">
-      <motion.div
-        className="h-full rounded-full bg-blue-600"
-        initial={{ width: 0 }}
-        animate={inView ? { width: `${value}%` } : { width: 0 }}
-        transition={{ duration: 1.2, delay, ease: "easeOut" }}
-      />
-    </div>
-  );
-}
-
 /* ─── Home Page ───────────────────────────────────────── */
 export default function HomePage() {
   const [activeService, setActiveService] = React.useState(0);
@@ -138,11 +122,50 @@ export default function HomePage() {
     },
   ];
 
+  const reviews = [
+    {
+      quote: "Setup took one phone call and the tech who followed up actually knew what he was talking about. No runaround, no upsell pressure — just a straight answer about what was available at my address.",
+      name: "Rachel Ortiz",
+      location: "Plano, TX",
+      rating: 5,
+    },
+    {
+      quote: "I've switched providers before and always dreaded the process. ZSolutionz walked me through the options in plain English and I was connected within the week.",
+      name: "Marcus Webb",
+      location: "Tulsa, OK",
+      rating: 5,
+    },
+    {
+      quote: "Had an outage during a storm and got a real person on the line in under two minutes. They tracked the issue and followed up the next day to confirm it was fixed.",
+      name: "Priya Nair",
+      location: "Columbus, OH",
+      rating: 5,
+    },
+    {
+      quote: "Straightforward pricing, no surprise fees on the first bill. That alone put them ahead of the last two companies I dealt with.",
+      name: "Dan Whitfield",
+      location: "Boise, ID",
+      rating: 4,
+    },
+    {
+      quote: "They asked good questions before recommending anything, instead of just pushing the most expensive plan. Felt like they actually wanted the right fit for my house.",
+      name: "Lauren Kessler",
+      location: "Richmond, VA",
+      rating: 5,
+    },
+    {
+      quote: "Support followed up after installation to make sure everything was running well. Small thing, but it's the kind of follow-through you don't often get anymore.",
+      name: "Trevor Simmons",
+      location: "Reno, NV",
+      rating: 5,
+    },
+  ];
+
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ══ HERO ════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center bg-white overflow-hidden">
+      <section className="relative flex items-center bg-white overflow-hidden">
         {/* Layered background */}
         <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-bl from-blue-50/70 via-blue-50/10 to-transparent pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
@@ -156,30 +179,32 @@ export default function HomePage() {
           }}
         />
 
-        <div className="container mx-auto px-6 lg:px-16 pt-28 pb-16 lg:pb-24 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="container mx-auto px-6 lg:px-16 pt-20 pb-12 lg:pb-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
 
             {/* LEFT */}
             <motion.div initial="hidden" animate="visible" variants={stagger}>
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-600 mb-8">
-                <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                Internet Solutions Company · 10+ Years
-              </motion.div>
+            <motion.div
+  variants={fadeUp}
+  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-blue-50 px-3.5 py-1 text-xs sm:text-sm font-medium text-blue-600 mb-5"
+>
+  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse" />
+  Internet Solutions Company · 10+ Years
+</motion.div>
 
               <motion.h1 variants={fadeUp}
-                className="font-black text-slate-900 leading-[1.04] tracking-tight mb-6"
-                style={{ fontSize: "clamp(2.6rem, 5.5vw, 5.2rem)" }}>
-                Connecting<br />
-                Customers<br />
-                <span className="gradient-text">Solutions.</span>
+                className="font-black text-slate-900 leading-[1.05] tracking-tight mb-4"
+                style={{ fontSize: "clamp(2.2rem, 4vw, 3.75rem)" }}>
+                Connecting Customers
+                <span className="gradient-text"> Solutions.</span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-slate-500 text-lg leading-relaxed mb-10 max-w-md">
+              <motion.p variants={fadeUp} className="text-slate-500 text-lg leading-relaxed mb-6 max-w-md">
                 ZSolutionz helps customers find reliable home internet and connectivity solutions —
                 professional service, dedicated support, real results.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-8">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 mb-6">
                 <Link href="/contact"
                   className="btn-glow inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 text-white font-semibold text-sm h-14 px-8 hover:bg-blue-700 transition-colors shadow-sm group">
                   Get In Touch
@@ -194,7 +219,7 @@ export default function HomePage() {
               {/* ZIP availability check */}
            {/* ZIP availability check */}
 {/* ZIP availability check */}
-<motion.div variants={fadeUp} className="mb-10 max-w-lg">
+<motion.div variants={fadeUp} className="mb-6 max-w-lg">
   <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3 flex items-center gap-2">
     <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
     Check Availability In Your Area
@@ -226,7 +251,7 @@ export default function HomePage() {
 
 
 {/* Trust row */}
-<motion.div variants={fadeUp} className="pt-8 border-t border-slate-100 flex flex-wrap items-center gap-x-8 gap-y-5">
+<motion.div variants={fadeUp} className="pt-5 border-t border-slate-100 flex flex-wrap items-center gap-x-8 gap-y-4">
   {[
     { icon: Award, value: "10+", label: "Years in Business" },
     { icon: Users, value: "10k+", label: "Customers Served" },
@@ -343,7 +368,7 @@ export default function HomePage() {
 
 
 {/* ══ STATS STRIP ═════════════════════════════════════════ */}
-<section className="relative bg-slate-900 py-10 md:py-12">
+<section className="relative bg-slate-900 py-8 md:py-10">
   <div className="container mx-auto px-6 lg:px-16">
     <div className="grid grid-cols-2 md:grid-cols-4">
       {[
@@ -398,23 +423,23 @@ export default function HomePage() {
 
 
       {/* ══ WHAT WE DO ══════════════════════════════════════════ */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-16">
           {/* Section header row */}
-          <div className="flex items-start justify-between border-b border-slate-100 pb-6 mb-16 md:mb-24">
+          <div className="flex items-start justify-between border-b border-slate-100 pb-6 mb-10 md:mb-14">
             <span className="text-slate-400 text-xs font-semibold uppercase tracking-[0.2em]">What We Do</span>
             <span className="text-slate-300 text-sm font-light">02</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* LEFT — text + numbered list */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-[1.08] mb-8"
-                style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}>
+              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-[1.08] mb-6"
+                style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>
                 Connecting You to<br />Reliable Solutions
               </motion.h2>
 
-              <motion.div variants={fadeUp} className="mb-10">
+              <motion.div variants={fadeUp} className="mb-7">
                 <Link href="/contact"
                   className="inline-flex items-center gap-2 rounded-md bg-blue-600 text-white font-semibold text-sm h-11 px-6 hover:bg-blue-700 transition-colors group">
                   Get in Touch
@@ -461,76 +486,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ PERFORMANCE / TRACK RECORD ══════════════════════════ */}
-      <section className="py-20 md:py-32 bg-[#EEF2FF]">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Section header row */}
-          <div className="flex items-start justify-between border-b border-blue-200/60 pb-6 mb-16 md:mb-24">
-            <span className="text-slate-500 text-xs font-semibold uppercase tracking-[0.2em]">Track Record</span>
-            <span className="text-blue-300 text-sm font-light">03</span>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* LEFT */}
-            <motion.div className="lg:col-span-5" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-[1.08] mb-5"
-                style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)" }}>
-                Consistent results.<br />Every time.
-              </motion.h2>
-              <motion.p variants={fadeUp} className="text-slate-500 text-base leading-relaxed mb-8 max-w-sm">
-                A decade of connecting customers with reliable internet solutions, building trust one interaction at a time.
-              </motion.p>
-              <motion.div variants={fadeUp}>
-                <Link href="/contact"
-                  className="inline-flex items-center gap-2 rounded-md bg-blue-600 text-white font-semibold text-sm h-11 px-6 hover:bg-blue-700 transition-colors group">
-                  Contact Us
-                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* RIGHT — stats with progress bars */}
-            <div className="lg:col-span-7 space-y-8">
-              {[
-                { label: "Customer Satisfaction",  value: 98, display: "98%",  desc: "Customers rate our service as excellent or very good." },
-                { label: "Years of Experience",    value: 84, display: "10+",  desc: "Over a decade of professional service and industry knowledge." },
-                { label: "Customers Served",       value: 75, display: "10k+", desc: "Hundreds of satisfied customers connected to reliable solutions." },
-              ].map((stat, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.5 }}
-                  className="grid grid-cols-[1fr_auto] gap-x-8 items-center">
-                  <div>
-                    <ProgressBar value={stat.value} delay={0.3 + i * 0.15} />
-                  </div>
-                  <div className="text-right min-w-[70px]">
-                    <span className="font-black text-slate-900 leading-none" style={{ fontSize: "clamp(2rem, 3vw, 2.8rem)" }}>
-                      {stat.display}
-                    </span>
-                  </div>
-                  <div className="col-span-2 mt-1.5">
-                    <span className="font-semibold text-slate-700 text-sm">{stat.label}</span>
-                    <span className="text-slate-400 text-sm ml-2">{stat.desc}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ══ WHY CHOOSE ══════════════════════════════════════════ */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-16">
           {/* Section header row */}
-          <div className="flex items-start justify-between border-b border-slate-100 pb-6 mb-16 md:mb-20">
+          <div className="flex items-start justify-between border-b border-slate-100 pb-6 mb-10 md:mb-12">
             <span className="text-slate-400 text-xs font-semibold uppercase tracking-[0.2em]">Why Us</span>
-            <span className="text-slate-300 text-sm font-light">04</span>
+            <span className="text-slate-300 text-sm font-light">03</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-[1.08] mb-6"
-                style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
+              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-[1.08] mb-5"
+                style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
                 Why Choose<br />ZSolutionz
               </motion.h2>
               <motion.p variants={fadeUp} className="text-slate-500 text-lg leading-relaxed">
@@ -561,20 +529,20 @@ export default function HomePage() {
       </section>
 
       {/* ══ MISSION ═════════════════════════════════════════════ */}
-      <section className="py-20 md:py-32 bg-slate-50 border-y border-slate-100">
+      <section className="py-14 md:py-20 bg-slate-50 border-y border-slate-100">
         <div className="container mx-auto px-6 lg:px-16">
-          <div className="flex items-start justify-between border-b border-slate-200 pb-6 mb-16 md:mb-20">
+          <div className="flex items-start justify-between border-b border-slate-200 pb-6 mb-10 md:mb-12">
             <span className="text-slate-400 text-xs font-semibold uppercase tracking-[0.2em]">Our Mission</span>
-            <span className="text-slate-300 text-sm font-light">05</span>
+            <span className="text-slate-300 text-sm font-light">04</span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-tight mb-8"
-                style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
+              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-tight mb-5"
+                style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
                 Customer-inspired.<br />
                 <span className="text-blue-600">Client Driven.</span>
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-slate-500 text-lg leading-relaxed mb-8">
+              <motion.p variants={fadeUp} className="text-slate-500 text-lg leading-relaxed mb-6">
                 Connect customers with reliable and innovative technology solutions that improve communication, productivity, and everyday life.
               </motion.p>
               <motion.ul variants={stagger} className="space-y-3">
@@ -609,15 +577,98 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ══ REVIEWS ═════════════════════════════════════════════ */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="container mx-auto px-6 lg:px-16">
+          {/* Section header row */}
+          <div className="flex items-start justify-between border-b border-slate-100 pb-6 mb-10 md:mb-12">
+            <span className="text-slate-400 text-xs font-semibold uppercase tracking-[0.2em]">Customer Voices</span>
+            <span className="text-slate-300 text-sm font-light">05</span>
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-8 md:mb-10">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-xl">
+              <motion.h2 variants={fadeUp} className="font-black text-slate-900 leading-[1.08] mb-4"
+                style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
+                What Customers<br />Are Saying
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-slate-500 text-lg leading-relaxed">
+                Real feedback from people we've connected to reliable service — not the highlight reel, the honest average.
+              </motion.p>
+            </motion.div>
+
+            {/* Aggregate rating */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-5 rounded-2xl border border-slate-100 bg-slate-50 px-7 py-5 shrink-0"
+            >
+              <span className="font-black text-slate-900 leading-none" style={{ fontSize: "clamp(2.4rem, 4vw, 3.2rem)" }}>
+                4.9
+              </span>
+              <div className="flex flex-col gap-1.5">
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={15} className="text-blue-600 fill-blue-600" />
+                  ))}
+                </div>
+                <span className="text-slate-500 text-xs font-medium">From 500+ verified customers</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Review cards */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
+            {reviews.map((r, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="flex flex-col p-6 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-300"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star
+                      key={j}
+                      size={14}
+                      className={j < r.rating ? "text-blue-600 fill-blue-600" : "text-slate-200 fill-slate-200"}
+                    />
+                  ))}
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-1">
+                  "{r.quote}"
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                  <div className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    {r.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-slate-900 text-sm font-semibold">{r.name}</span>
+                    <span className="text-slate-400 text-xs">{r.location}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* ══ CTA ════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-blue-600">
+      <section className="py-14 md:py-18 bg-blue-600">
         <div className="container mx-auto px-6 lg:px-16 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.h2 variants={fadeUp} className="font-black text-white mb-4"
-              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+            <motion.h2 variants={fadeUp} className="font-black text-white mb-3"
+              style={{ fontSize: "clamp(1.6rem, 3vw, 2.3rem)" }}>
               Ready to Get Connected?
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-blue-100 text-lg max-w-xl mx-auto mb-10">
+            <motion.p variants={fadeUp} className="text-blue-100 text-lg max-w-xl mx-auto mb-7">
               Reach out today and discover how ZSolutionz can connect your customers with the solutions they deserve.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row justify-center gap-4">

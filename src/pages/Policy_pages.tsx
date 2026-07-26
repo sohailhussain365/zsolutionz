@@ -92,51 +92,74 @@ const policies: { key: PolicyKey; label: string; icon: typeof Shield; updated: s
   },
 ];
 
+// Reads ?tab=<key> from the URL so links (e.g. from the footer) can deep-link
+// straight into a specific policy. Falls back to Privacy Policy if the param
+// is missing or invalid.
+function getInitialTab(): PolicyKey {
+  if (typeof window === "undefined") return "privacy";
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get("tab");
+  if (tab && policies.some((p) => p.key === tab)) return tab as PolicyKey;
+  return "privacy";
+}
+
 export default function PoliciesPage() {
-  const [active, setActive] = useState<PolicyKey>("privacy");
+  const [active, setActive] = useState<PolicyKey>(getInitialTab);
   const activePolicy = policies.find((p) => p.key === active)!;
+
+  // Keeps the URL's ?tab= param in sync when a user clicks a different tab,
+  // so the page stays deep-linkable / shareable / bookmarkable.
+  const handleTabChange = (key: PolicyKey) => {
+    setActive(key);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", key);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ══ HERO ════════════════════════════════════════════════ */}
-      <section className="relative min-h-[65vh] flex items-center pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden bg-slate-900">
+      <section className="relative flex items-center pb-10 pt-24 md:pb-14 md:pt-28 overflow-hidden bg-white">
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div style={{ background: "radial-gradient(ellipse 60% 60% at 25% 25%, rgba(37,99,235,0.35) 0%, transparent 60%)" }} className="absolute inset-0" />
-          <div style={{ background: "radial-gradient(ellipse 50% 55% at 80% 70%, rgba(56,189,248,0.25) 0%, transparent 60%)" }} className="absolute inset-0" />
-          <div style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "56px 56px" }} className="absolute inset-0" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-900 to-transparent" />
+          <div style={{ background: "radial-gradient(ellipse 60% 60% at 25% 25%, rgba(37,99,235,0.10) 0%, transparent 60%)" }} className="absolute inset-0" />
+          <div style={{ background: "radial-gradient(ellipse 50% 55% at 80% 70%, rgba(56,189,248,0.08) 0%, transparent 60%)" }} className="absolute inset-0" />
+          <div style={{ backgroundImage: "linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px)", backgroundSize: "56px 56px" }} className="absolute inset-0" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
         </div>
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-8">
-                <Link href="/" className="hover:text-slate-200 transition-colors">Home</Link>
-                <span className="text-slate-600">/</span>
-                <span className="text-blue-300">Policies</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-6">
+                <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
+                <span className="text-slate-300">/</span>
+                <span className="text-blue-500">Policies</span>
               </div>
 
-              <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-5 py-2.5 text-sm font-medium text-blue-200 mb-8">
+              <div className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-600 mb-6">
                 <Shield size={14} />
                 Transparency You Can Trust
               </div>
 
-              <h1 className="font-extrabold text-white tracking-tight leading-[1.02] mb-6"
-                style={{ fontSize: "clamp(2.5rem, 5vw, 4.25rem)" }}>
-                Clear Terms.{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-sky-300">
+              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4"
+                style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
+                Clear Terms{" "}
+                <br />
+                <span className="gradient-text">
                   No Fine-Print Surprises.
                 </span>
               </h1>
-              <p className="text-xl text-slate-300 max-w-xl leading-relaxed">
+              <p className="text-lg md:text-xl text-slate-500 max-w-xl leading-relaxed">
                 Every policy that governs how we handle your data, your privacy, and your right to be contacted — laid out in plain language, all in one place.
               </p>
             </motion.div>
 
             {/* Signature: fanned document / shield cluster */}
-            <div className="relative h-[320px] hidden lg:block">
-              <div style={{ background: "radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%)" }}
+            <div className="relative h-[300px] hidden lg:block">
+              <div style={{ background: "radial-gradient(circle, rgba(37,99,235,0.14) 0%, transparent 70%)" }}
                 className="absolute inset-0 blur-2xl" />
               {[
                 { icon: Lock, rotate: -14, top: "10%", left: "8%", delay: 0 },
@@ -147,7 +170,7 @@ export default function PoliciesPage() {
               ].map((c, i) => (
                 <motion.div
                   key={i}
-                  className="absolute h-16 w-16 rounded-2xl bg-white/8 border border-white/15 backdrop-blur-md flex items-center justify-center text-blue-200 shadow-xl"
+                  className="absolute h-16 w-16 rounded-2xl bg-blue-50 border border-blue-100 backdrop-blur-md flex items-center justify-center text-blue-600 shadow-lg"
                   style={{ top: c.top, left: c.left, rotate: `${c.rotate}deg` }}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: [0, -10, 0] }}
@@ -160,11 +183,11 @@ export default function PoliciesPage() {
                 </motion.div>
               ))}
               <motion.div
-                className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-300/30 flex items-center justify-center"
+                className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-200 flex items-center justify-center"
                 animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Shield size={30} className="text-blue-200" strokeWidth={1.5} />
+                <Shield size={30} className="text-blue-600" strokeWidth={1.5} />
               </motion.div>
             </div>
           </div>
@@ -172,17 +195,17 @@ export default function PoliciesPage() {
       </section>
 
       {/* ══ POLICY TABS + CONTENT ═══════════════════════════════ */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-16">
 
           {/* Tabs */}
-          <div className="flex flex-wrap gap-2 mb-12 sticky top-[72px] z-20 bg-white/90 backdrop-blur-md py-3 -mx-6 px-6 lg:-mx-16 lg:px-16 border-b border-slate-100">
+          <div className="flex flex-wrap gap-2 mb-10 sticky top-[72px] z-20 bg-white/90 backdrop-blur-md py-3 -mx-6 px-6 lg:-mx-16 lg:px-16 border-b border-slate-100">
             {policies.map((p) => {
               const isActive = active === p.key;
               return (
                 <button
                   key={p.key}
-                  onClick={() => setActive(p.key)}
+                  onClick={() => handleTabChange(p.key)}
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 ${
                     isActive
                       ? "bg-blue-600 text-white shadow-sm"
@@ -205,7 +228,7 @@ export default function PoliciesPage() {
               transition={{ duration: 0.3 }}
               className="max-w-3xl"
             >
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="h-14 w-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
                   <activePolicy.icon size={24} strokeWidth={1.5} />
                 </div>
@@ -215,9 +238,9 @@ export default function PoliciesPage() {
                 </div>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {activePolicy.sections.map((s, i) => (
-                  <div key={i} className="glass-card rounded-2xl p-7">
+                  <div key={i} className="glass-card rounded-2xl p-6">
                     <h3 className="text-base font-extrabold text-slate-900 mb-2">{s.heading}</h3>
                     <p className="text-sm text-slate-500 leading-relaxed">{s.body}</p>
                   </div>
@@ -229,14 +252,14 @@ export default function PoliciesPage() {
       </section>
 
       {/* ══ CONTACT CTA ═════════════════════════════════════════ */}
-      <section className="py-16 md:py-24 bg-slate-50 border-t border-slate-100">
+      <section className="py-14 md:py-20 bg-slate-50 border-t border-slate-100">
         <div className="container mx-auto px-6 lg:px-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="glass-card rounded-3xl p-10 md:p-14 max-w-3xl mx-auto text-center">
+            className="glass-card rounded-3xl p-8 md:p-10 max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3">
               Questions about any of these policies?
             </h2>
-            <p className="text-slate-500 mb-8 max-w-lg mx-auto">
+            <p className="text-slate-500 mb-6 max-w-lg mx-auto">
               Our team is happy to walk you through what any of this means for you.
             </p>
             <Link href="/contact"

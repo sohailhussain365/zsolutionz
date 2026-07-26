@@ -39,7 +39,7 @@ function FaqRow({ item, isOpen, onClick }: { item: FaqItem; isOpen: boolean; onC
     <div className="glass-card rounded-2xl overflow-hidden">
       <button
         onClick={onClick}
-        className="w-full flex items-center justify-between gap-4 px-7 py-6 text-left"
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
       >
         <span className="text-base md:text-lg font-bold text-slate-900">{item.q}</span>
         <span className={`shrink-0 h-8 w-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
@@ -55,7 +55,7 @@ function FaqRow({ item, isOpen, onClick }: { item: FaqItem; isOpen: boolean; onC
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="px-7 pb-6 text-sm md:text-base text-slate-500 leading-relaxed">
+            <p className="px-6 pb-5 text-sm md:text-base text-slate-500 leading-relaxed">
               {item.a}
             </p>
           </motion.div>
@@ -72,7 +72,7 @@ export default function FAQPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ══ HERO ════════════════════════════════════════════════ */}
-      <section className="relative min-h-[45vh] flex items-center pb-16 pt-32 md:pb-20 md:pt-40 overflow-hidden bg-white">
+      <section className="relative flex items-center pb-10 pt-24 md:pb-14 md:pt-28 overflow-hidden bg-white">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div style={{ background: "radial-gradient(ellipse 60% 60% at 75% 30%, rgba(37,99,235,0.10) 0%, transparent 60%)" }} className="absolute inset-0" />
           <div style={{ backgroundImage: "linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px)", backgroundSize: "64px 64px" }} className="absolute inset-0" />
@@ -81,22 +81,22 @@ export default function FAQPage() {
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-            <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-8">
+            <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-6">
               <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
               <span className="text-slate-300">/</span>
               <span className="text-blue-500">FAQ</span>
             </div>
 
-            <div className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-600 mb-8">
+            <div className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-600 mb-6">
               <HelpCircle size={14} />
               Frequently Asked Questions
             </div>
 
-            <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.02] mb-6"
-              style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
+            <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4"
+              style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
               Got Questions? <span className="gradient-text">We've Got Answers</span>
             </h1>
-            <p className="text-xl text-slate-500 max-w-xl leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-500 max-w-xl leading-relaxed">
               Everything you need to know about comparing providers, pricing, and getting connected.
             </p>
           </motion.div>
@@ -104,7 +104,7 @@ export default function FAQPage() {
       </section>
 
       {/* ══ FAQ LIST ════════════════════════════════════════════ */}
-      <section className="py-16 md:py-28 bg-slate-50 border-y border-slate-100">
+      <section className="py-14 md:py-20 bg-slate-50 border-y border-slate-100">
         <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
             className="space-y-4">
@@ -125,17 +125,17 @@ export default function FAQPage() {
       </section>
 
       {/* ══ STILL HAVE QUESTIONS ════════════════════════════════ */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-            className="glass-card rounded-3xl p-10 md:p-14 max-w-3xl mx-auto text-center">
-            <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mx-auto mb-5">
+            className="glass-card rounded-3xl p-8 md:p-10 max-w-3xl mx-auto text-center">
+            <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mx-auto mb-4">
               <MessageCircleQuestion size={22} strokeWidth={1.5} />
             </div>
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-3">
               Still have a question?
             </h2>
-            <p className="text-slate-500 mb-8 max-w-lg mx-auto">
+            <p className="text-slate-500 mb-6 max-w-lg mx-auto">
               Our team is happy to help you compare plans or sort out anything that's not covered here.
             </p>
             <Link href="/contact"
