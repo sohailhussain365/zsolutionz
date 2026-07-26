@@ -20,6 +20,7 @@ import {
   LayoutGrid,
   Sparkles,
   MapPin,
+  X,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -117,16 +118,16 @@ const HERO_ICON_TILES = [
 ];
 
 // ---------------------------------------------------------------------------
-// Inline availability check — lives inside the Pricing section itself
-// (not a standalone widget/component). Label sits on the left, the
-// zip input and button sit on the right.
+// Inline availability check. Both instances (hero + CTA banner) report the
+// entered zip up to the parent via onCheck, which opens the shared modal.
 // ---------------------------------------------------------------------------
-function AvailabilityCheck({ variant = "hero" }) {
+function AvailabilityCheck({ variant = "hero", onCheck }) {
   const [zip, setZip] = useState("");
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Hook up to real availability lookup here.
+    if (zip.trim().length === 0) return; // only open the popup once a zip is entered
+    onCheck?.(zip.trim());
   };
 
   // Compact: input + button only, styled to sit on the blue CTA banner
@@ -196,8 +197,59 @@ function AvailabilityCheck({ variant = "hero" }) {
 }
 
 // ---------------------------------------------------------------------------
+// Shared "Check Availability" result modal, opened by either
+// AvailabilityCheck instance once a zip has been submitted.
+// ---------------------------------------------------------------------------
+function AvailabilityModal({ zip, onClose }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-sm rounded-2xl bg-white p-6 shadow-[0_30px_60px_-15px_rgba(15,23,42,0.35)] sm:p-7"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-5 top-5 text-slate-400 transition hover:text-slate-600"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        <h3 className="text-lg font-bold text-slate-900">Check Availability</h3>
+
+        <p className="mt-6 text-center text-sm leading-relaxed text-slate-600">
+          Options may be available in <span className="font-bold text-slate-900">{zip}</span>.
+        </p>
+
+        <p className="mt-3 text-center text-xs leading-relaxed text-slate-400">
+          Availability is subject to confirmation by full address and provider coverage.
+        </p>
+
+        <a
+          href="tel:+18001234567"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-[#3B4FE0] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(59,79,224,0.5)] transition hover:bg-[#2f3fc4]"
+        >
+          <Phone className="h-4 w-4" />
+          Call to Review Options
+        </a>
+
+        <p className="mt-4 text-center text-[11px] leading-relaxed text-slate-400">
+          Results are estimates only. Actual availability, speeds, pricing, and terms may vary.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 
 export default function PricingPage() {
+  const [availabilityZip, setAvailabilityZip] = useState(null);
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       <style>{`
@@ -269,7 +321,7 @@ export default function PricingPage() {
               </p>
 
               <div className="mb-5">
-                <AvailabilityCheck variant="hero" />
+                <AvailabilityCheck variant="hero" onCheck={setAvailabilityZip} />
               </div>
 
               {/* rating line */}
@@ -547,7 +599,7 @@ export default function PricingPage() {
               </p>
             </div>
           </div>
-          <AvailabilityCheck variant="compact" />
+          <AvailabilityCheck variant="compact" onCheck={setAvailabilityZip} />
         </div>
       </section>
 
@@ -565,6 +617,11 @@ export default function PricingPage() {
           ))}
         </div>
       </section>
+
+      {/* Shared availability result popup, opened from either form above */}
+      {availabilityZip && (
+        <AvailabilityModal zip={availabilityZip} onClose={() => setAvailabilityZip(null)} />
+      )}
     </div>
   );
 }
