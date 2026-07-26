@@ -8,7 +8,7 @@ interface ZipCheckWidgetProps {
 
 export function ZipCheckWidget({
   className = "",
-  phoneNumber = "+1-800-555-0199",
+  phoneNumber = "+12623992770",
 }: ZipCheckWidgetProps) {
   const [zip, setZip] = useState("");
   const [showModal, setShowModal] = useState(false);

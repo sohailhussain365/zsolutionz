@@ -9,7 +9,7 @@ import {
   Layers,
   ShieldCheck,
 } from "lucide-react";
-import missionBg from "@/assets/mission-bg.png";
+import missionBg from "@/assets/customer inspired client.png";
 import aboutTechBg from "@/assets/about-tech.png";
 import { IsometricStack } from "@/components/isometric-graphic";
 
@@ -94,7 +94,7 @@ export default function HomePage() {
   // Hero ZIP availability check
   const [zip, setZip] = React.useState("");
   const [showZipModal, setShowZipModal] = React.useState(false);
-  const phoneNumber = "+1-800-555-0199";
+  const phoneNumber = "+12623992770";
 
   const handleZipSubmit = () => {
     if (!zip.trim()) return;
@@ -374,8 +374,8 @@ export default function HomePage() {
       {[
         { icon: Calendar, num: "10", unit: "+ yrs", label: "Years in Business" },
         { icon: Users, num: "10k", unit: "+", label: "Customers Served" },
-        { icon: Layers, num: "3", unit: "", label: "Core Services" },
-        { icon: ShieldCheck, num: "100", unit: "%", label: "Customer Focus" },
+        { icon: Layers, num: "10", unit: "+", label: "Core Services" },
+        { icon: ShieldCheck, num: "15", unit: "+", label: "Providers" },
       ].map((s, i) => (
         <motion.div
           key={i}

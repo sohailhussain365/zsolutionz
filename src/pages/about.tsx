@@ -67,7 +67,7 @@ export default function AboutPage() {
         <div className="pt-5 border-t border-slate-100 flex flex-wrap items-center gap-x-8 gap-y-4">
           {[
             { icon: Award, value: "10+", label: "Years in Business" },
-            { icon: Users, value: "500+", label: "Customers Served" },
+            { icon: Users, value: "10k+", label: "Customers Served" },
             { icon: CheckCircle, value: "100%", label: "Independent & Unbiased" },
           ].map((b, i) => (
             <div key={i} className="flex items-center gap-3">
@@ -144,7 +144,7 @@ export default function AboutPage() {
               <div className="mt-7 grid grid-cols-2 gap-5">
                 {[
                   { num: 10, suffix: "+", label: "Years of Experience" },
-                  { num: 500, suffix: "+", label: "Customers Served" },
+                  { num: 10, suffix: "k", label: "Customers Served" },
                 ].map((s, i) => (
                   <div key={i} className="glass-card rounded-2xl p-6 text-center">
                     <div className="text-3xl font-extrabold text-blue-600 mb-1">

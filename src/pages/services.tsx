@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
   Wifi, Tv, Phone, Smartphone, ArrowRight,
   ShieldCheck, DollarSign, Headphones, Lock,
-  Award, Users, LayoutGrid,
+  Award, Users, LayoutGrid, X, PhoneCall,
 } from "lucide-react";
 
 const fadeUp = {
@@ -34,6 +35,9 @@ const trustItems = [
 ];
 
 export default function ServicesPage() {
+  const [activeService, setActiveService] = useState<typeof services[number] | null>(null);
+  const phoneNumber = "+12623992770";
+
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
       <section className="relative bg-slate-50/60 pt-20 pb-14 md:pt-24 md:pb-16">
@@ -98,10 +102,12 @@ export default function ServicesPage() {
         </div>
         <h3 className="text-lg font-extrabold text-slate-900 mb-2">{s.title}</h3>
         <p className="text-sm text-slate-500 leading-relaxed mb-6">{s.desc}</p>
-        <Link href="/contact"
+        <button
+          type="button"
+          onClick={() => setActiveService(s)}
           className={`inline-flex items-center gap-1.5 text-sm font-bold ${c.text} group-hover:gap-2.5 transition-all mt-auto`}>
           Learn More <ArrowRight size={14} />
-        </Link>
+        </button>
       </motion.div>
     );
   })}
@@ -130,6 +136,50 @@ export default function ServicesPage() {
 
         </div>
       </section>
+
+      {/* ══ LEARN MORE MODAL ════════════════════════════════════ */}
+      {activeService && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          onClick={() => setActiveService(null)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl"
+          >
+            <div className="flex items-start justify-between mb-6">
+              <h3 className="text-xl font-bold text-slate-900">{activeService.title}</h3>
+              <button
+                onClick={() => setActiveService(null)}
+                className="text-slate-400 hover:text-slate-600 transition-colors"
+                aria-label="Close"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <p className="text-center text-slate-700 mb-4">
+              Speak with one of our specialists to review {activeService.title.toLowerCase()} plans and pricing available in your area.
+            </p>
+
+            <p className="text-center text-slate-500 text-sm mb-6">
+              Availability, plans, and pricing are subject to confirmation by full address and provider coverage.
+            </p>
+
+            <a
+              href={`tel:${phoneNumber}`}
+              className="flex items-center justify-center gap-2 h-12 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors mb-4"
+            >
+              <PhoneCall size={16} fill="currentColor" />
+              Call to Review Options
+            </a>
+
+            <p className="text-center text-xs text-slate-400 leading-relaxed">
+              Results are estimates only. Actual availability, speeds, pricing, and terms may vary.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

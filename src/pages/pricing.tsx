@@ -101,8 +101,8 @@ const STEPS = [
 ];
 
 const STATS = [
-  { icon: LayoutGrid, value: "100+", label: "Plans Compared" },
-  { icon: Sparkles, value: "50+", label: "Providers Covered" },
+  { icon: LayoutGrid, value: "10+", label: "Core Services" },
+  { icon: Sparkles, value: "15+", label: "Providers Covered" },
   { icon: Users, value: "10k+", label: "Happy Customers" },
   { icon: Clock, value: "24/7", label: "Expert Support" },
 ];
@@ -124,7 +124,7 @@ const HERO_ICON_TILES = [
 function AvailabilityCheck({ variant = "hero", onCheck }) {
   const [zip, setZip] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (zip.trim().length === 0) return; // only open the popup once a zip is entered
     onCheck?.(zip.trim());
@@ -200,7 +200,7 @@ function AvailabilityCheck({ variant = "hero", onCheck }) {
 // Shared "Check Availability" result modal, opened by either
 // AvailabilityCheck instance once a zip has been submitted.
 // ---------------------------------------------------------------------------
-function AvailabilityModal({ zip, onClose }) {
+function AvailabilityModal({ zip, onClose }): React.JSX.Element {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4"
@@ -230,7 +230,7 @@ function AvailabilityModal({ zip, onClose }) {
         </p>
 
         <a
-          href="tel:+18001234567"
+          href="tel:+12623992770"
           className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-[#3B4FE0] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(59,79,224,0.5)] transition hover:bg-[#2f3fc4]"
         >
           <Phone className="h-4 w-4" />
