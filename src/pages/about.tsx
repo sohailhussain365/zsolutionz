@@ -51,7 +51,7 @@ export default function AboutPage() {
           <span className="gradient-text">ZSolutionz</span>
         </h1>
         <p className="text-xl text-slate-500 max-w-2xl leading-relaxed mb-10">
-          Committed to connecting customers with reliable internet services while delivering exceptional customer support across every interaction.
+          An independent comparison platform helping customers explore and compare internet, TV, home phone, and mobile service options available in their area.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link href="/contact"
@@ -115,12 +115,12 @@ export default function AboutPage() {
               <span className="section-label">Who We Are</span>
               <h2 className="font-extrabold text-slate-900 leading-tight mb-8" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
                 Connecting People With<br />
-                <span className="gradient-text">Trusted Solutions</span>
+                <span className="gradient-text">Trusted Comparisons</span>
               </h2>
               <div className="space-y-5 text-slate-500 text-lg leading-relaxed">
-                <p>ZSolutionz is committed to helping customers connect with reliable internet services while providing exceptional customer support. We focus on professionalism, transparency, and long-term customer satisfaction.</p>
-                <p>At ZSolutionz, we connect customers with reliable technology, internet, and communication solutions tailored to their needs. Our focus is on delivering exceptional service, trusted partnerships, and a seamless customer experience.</p>
-                <p>Founded on the belief that everyone deserves quality connectivity, ZSolutionz has grown into a trusted partner for hundreds of customers — always putting their needs first.</p>
+                <p>ZSolutionz LLC is an independent internet, TV, home phone, and mobile service comparison platform. We help customers explore and compare available service options in their area, making it easier to find plans that best fit their needs.</p>
+                <p>We provide comparison information and order assistance for a variety of service providers. All provider names, logos, trademarks, and brand names are the property of their respective owners and are used solely for identification and comparison purposes. ZSolutionz LLC is not affiliated with, endorsed by, or acting on behalf of any specific provider, and we do not guarantee service availability, pricing, promotions, or installation timelines, as these may vary by location and provider.</p>
+                <p>We may receive compensation from participating partners, authorized distributors, or service providers when customers purchase eligible services through our platform. This results in no additional cost to the customer. Our services are limited to new service inquiries and orders — we don't have access to existing customer accounts and can't assist with billing, technical support, outages, repairs, account changes, password resets, or cancellations. For those, customers should contact their provider directly.</p>
               </div>
               <div className="mt-10 grid grid-cols-2 gap-5">
                 {[
@@ -169,14 +169,14 @@ export default function AboutPage() {
                 <span className="gradient-text">Client Driven.</span>
               </h2>
               <p className="text-slate-500 text-lg leading-relaxed mb-10">
-                Connect customers with reliable and innovative technology solutions that improve communication, productivity, and everyday life. We strive to deliver exceptional service, build lasting relationships, and create value through trusted partnerships and customer-focused support.
+                Help customers navigate the crowded world of internet, TV, home phone, and mobile services with clear, independent comparisons — so they can make informed decisions with confidence, backed by responsive order assistance every step of the way.
               </p>
               <motion.ul initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-3">
                 {[
-                  "Personalized solutions tailored to customer needs",
-                  "Dedicated support and professional guidance",
-                  "Trusted technology and connectivity partners",
-                  "Focus on quality service and customer experience",
+                  "Independent, unbiased comparisons across providers",
+                  "Dedicated order assistance and professional guidance",
+                  "Transparent disclosure of partnerships and compensation",
+                  "Focus on clarity, honesty, and customer experience",
                 ].map((item, i) => (
                   <motion.li key={i} variants={fadeUp}
                     className="flex items-center gap-4 glass-card rounded-xl p-4 hover:border-blue-200 transition-all duration-300">
@@ -213,9 +213,9 @@ export default function AboutPage() {
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: Eye,    title: "Our Vision",  desc: "To be the most trusted name in customer connectivity solutions — known for integrity, expertise, and genuine care for every person we serve." },
-              { icon: Target, title: "Our Mission", desc: "Connect customers with reliable and innovative technology solutions that improve communication, productivity, and everyday life through exceptional service." },
-              { icon: Users,  title: "Our Purpose", desc: "To build lasting relationships between customers and the technology solutions that empower them — creating value, trust, and connection that endures." },
+              { icon: Eye,    title: "Our Vision",  desc: "To be the most trusted independent resource for comparing connectivity services — known for integrity, transparency, and genuine care for every person we serve." },
+              { icon: Target, title: "Our Mission", desc: "Help customers compare internet, TV, home phone, and mobile options and place new service orders with clarity, honesty, and dependable support." },
+              { icon: Users,  title: "Our Purpose", desc: "To make finding the right service simple — giving customers clear comparisons and honest guidance so they can choose with confidence." },
             ].map((item, i) => (
               <motion.div key={i} variants={fadeUp}
                 className="glass-card-shimmer rounded-3xl p-10 hover:border-blue-200 hover:shadow-md transition-all duration-500 group relative overflow-hidden">
@@ -240,7 +240,7 @@ export default function AboutPage() {
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Star,           num: "01", title: "Integrity",              desc: "We operate with honesty and transparency in everything we do — with customers, partners, and each other." },
+              { icon: Star,           num: "01", title: "Integrity",              desc: "We operate with honesty and transparency in everything we do — including clear disclosure of our partnerships and how we're compensated." },
               { icon: HeartHandshake, num: "02", title: "Customer Commitment",    desc: "Our clients come first, always. We go above and beyond to ensure every customer feels valued and heard." },
               { icon: TrendingUp,     num: "03", title: "Professional Growth",    desc: "We invest in our team's continuous development because a stronger team delivers a stronger customer experience." },
               { icon: Zap,            num: "04", title: "Continuous Improvement", desc: "We never stop evolving. Every interaction, every process, every service — we're always looking to do better." },
@@ -267,7 +267,7 @@ export default function AboutPage() {
               Ready to Work With Us?
             </h2>
             <p className="text-blue-100 text-lg max-w-xl mx-auto mb-10">
-              Get in touch today and discover how ZSolutionz can connect your customers with the solutions they deserve.
+              Get in touch today and let ZSolutionz help you compare service options and find the plan that fits your needs.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/contact"

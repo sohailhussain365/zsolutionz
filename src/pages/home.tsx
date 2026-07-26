@@ -169,8 +169,8 @@ export default function HomePage() {
               <motion.h1 variants={fadeUp}
                 className="font-black text-slate-900 leading-[1.04] tracking-tight mb-6"
                 style={{ fontSize: "clamp(2.6rem, 5.5vw, 5.2rem)" }}>
-                Connecting.<br />
-                Customers.<br />
+                Connecting<br />
+                Customers<br />
                 <span className="gradient-text">Solutions.</span>
               </motion.h1>
 
