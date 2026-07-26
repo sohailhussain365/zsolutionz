@@ -347,7 +347,7 @@ export default function HomePage() {
   <div className="container mx-auto px-6 lg:px-16">
     <div className="grid grid-cols-2 md:grid-cols-4">
       {[
-        { icon: Calendar, num: "10+", unit: "yrs", label: "Years in Business" },
+        { icon: Calendar, num: "10", unit: "+ yrs", label: "Years in Business" },
         { icon: Users, num: "10k", unit: "+", label: "Customers Served" },
         { icon: Layers, num: "3", unit: "", label: "Core Services" },
         { icon: ShieldCheck, num: "100", unit: "%", label: "Customer Focus" },
