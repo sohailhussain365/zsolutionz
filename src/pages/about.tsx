@@ -6,9 +6,10 @@ import {
 } from "lucide-react";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { IsometricStack } from "@/components/isometric-graphic";
-import aboutTechBg from "@/assets/about-tech.png";
-import missionBg from "@/assets/mission-bg.png";
+import aboutTechBg from "@/assets/who we are.png";
+import missionBg from "@/assets/customer inspired client.png";
 import { AboutGraphic } from "@/components/about-graphics";
+import aboutlogo from "@/assets/Layer 12.png"; 
 
 
 const fadeUp    = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
@@ -104,8 +105,11 @@ export default function AboutPage() {
         </div>
 
         {/* ▼ CHANGED: AboutGraphic replaces IsometricStack */}
-        <AboutGraphic className="max-w-[520px] mx-auto animate-float-y relative" />
-
+<img
+    src={aboutlogo}
+    alt="ZSolutionz connectivity illustration"
+    className="max-w-[420px] mx-auto animate-float-y"
+  />
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}

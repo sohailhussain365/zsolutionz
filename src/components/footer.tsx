@@ -45,11 +45,11 @@ export function Footer() {
               10+ Years of Experience
             </div>
             <div className="flex items-center gap-2.5">
-              <a href="https://www.linkedin.com/company/zsolutionz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+              <a href="https://www.linkedin.com/company/zsolutionz-llc/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
                 className="h-9 w-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:shadow-[0_0_14px_rgba(37,99,235,0.4)] transition-all duration-300">
                 <FaLinkedinIn size={13} />
               </a>
-              <a href="https://www.facebook.com/zsolutionz" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+              <a href="https://www.facebook.com/61590427209798/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
                 className="h-9 w-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:shadow-[0_0_14px_rgba(37,99,235,0.4)] transition-all duration-300">
                 <FaFacebook size={13} />
               </a>

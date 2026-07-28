@@ -4,8 +4,8 @@ import {
   TrendingUp, Users, Laptop, ArrowRight,
   CheckCircle, Briefcase, MapPin, Clock, DollarSign, Heart
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.png";
-import { JoinGraphic } from "@/components/joinus-graphics.tsx";
+import heroBg from "@/assets/A Culture Built on trust.png";
+import joinImg from "@/assets/Layer 120.png";
 
 const fadeUp    = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
 const fadeLeft  = { hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] as [number, number, number, number] } } };
@@ -17,7 +17,7 @@ export default function JoinPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative flex items-center pb-10 pt-24 md:pb-14 md:pt-28 overflow-hidden bg-white">
+      <section className="relative bg-white overflow-hidden flex items-center py-16 lg:py-20">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div style={{ background: "radial-gradient(ellipse 60% 70% at 75% 35%, rgba(37,99,235,0.10) 0%, transparent 65%)" }} className="absolute inset-0" />
           {/* Diagonal ascending lines — a "growth trajectory" motif unique to Join */}
@@ -30,26 +30,28 @@ export default function JoinPage() {
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
         </div>
 
-        <div className="container relative z-10 mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-400 mb-6">
+        <div className="container relative z-10 mx-auto px-6 lg:px-12 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+
+            {/* LEFT — text */}
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col justify-center h-full">
+              <motion.div variants={fadeUp} className="flex items-center gap-2 text-xs font-medium text-slate-400 mb-6">
                 <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
                 <span className="text-slate-300">/</span>
                 <span className="text-blue-500">Join Us</span>
-              </div>
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-green-200 bg-green-50 px-5 py-2 text-sm font-medium text-green-700 mb-6">
+              </motion.div>
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 rounded-full border border-green-200 bg-green-50 px-5 py-2 text-sm font-medium text-green-700 mb-6">
                 <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                 We Are Hiring — 3 Open Roles
-              </div>
-              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4" style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
+              </motion.div>
+              <motion.h1 variants={fadeUp} className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4" style={{ fontSize: "clamp(2.1rem, 4vw, 3.5rem)" }}>
                 Build Your Career<br />With{" "}
                 <span className="gradient-text">ZSolutionz</span>
-              </h1>
-              <p className="text-lg md:text-xl text-slate-500 max-w-2xl leading-relaxed mb-8">
+              </motion.h1>
+              <motion.p variants={fadeUp} className="text-base lg:text-lg text-slate-500 max-w-2xl leading-relaxed mb-8">
                 We are looking for motivated individuals who want to grow with us. Join a team that values your skills, supports your development, and rewards your hard work.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              </motion.p>
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
                 <a href="#openings"
                   className="btn-glow inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 text-white font-semibold h-14 px-8 hover:bg-blue-700 transition-all">
                   View Openings <ArrowRight size={18} />
@@ -58,14 +60,15 @@ export default function JoinPage() {
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 text-slate-700 font-semibold h-14 px-8 hover:bg-slate-50 hover:border-slate-300 transition-all">
                   Learn More
                 </Link>
-              </div>
+              </motion.div>
             </motion.div>
 
+            {/* RIGHT — image, same pattern as other heroes */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="relative hidden lg:block"
+              className="relative hidden lg:flex items-center justify-center h-full translate-y-4"
             >
               {/* Ascending bars — a "growth" signature unique to Join */}
               <div className="absolute -right-4 bottom-8 flex items-end gap-2.5 pointer-events-none" aria-hidden="true">
@@ -79,7 +82,13 @@ export default function JoinPage() {
                   />
                 ))}
               </div>
-              <JoinGraphic className="max-w-[520px] mx-auto animate-float-y relative" />
+
+              <img
+                src={joinImg}
+                alt="ZSolutionz careers illustration"
+                className="max-w-[450px] xl:max-w-[500px] mx-auto animate-float-y relative"
+              />
+
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -181,7 +181,7 @@ export default function ContactPage() {
             >
               {/* Radar sweep — "we're listening" signature, unique to Contact */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
-                <div className="relative h-[300px] w-[300px] rounded-full border border-blue-200/60 flex items-center justify-center overflow-hidden">
+                <div className="relative h-[230px] w-[230px] rounded-full border border-blue-200/60 flex items-center justify-center overflow-hidden">
                   <div className="absolute h-[70%] w-[70%] rounded-full border border-blue-200/50" />
                   <div className="absolute h-[40%] w-[40%] rounded-full border border-blue-200/40" />
                   <motion.div
@@ -196,17 +196,24 @@ export default function ContactPage() {
               <img
                 src={mailIcon}
                 alt="Contact us"
-                className="max-w-[460px] w-full mx-auto animate-float-y relative"
+                className="max-w-[340px] w-full mx-auto animate-float-y relative"
               />
-              <motion.div
+              <motion.a
+                href="tel:+12623992770"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
-                className="absolute top-4 right-2 glass-card rounded-2xl px-5 py-4 flex items-center gap-3"
+                className="absolute top-2 right-0 glass-card rounded-2xl px-5 py-4 flex items-center gap-3 hover:-translate-y-0.5 transition-transform"
               >
-              
-              
-              </motion.div>
+                <div className="h-11 w-11 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0">
+                  <Phone size={18} strokeWidth={1.75} />
+                </div>
+                <div className="leading-tight">
+                  <div className="text-slate-400 text-[11px] font-semibold uppercase tracking-wider mb-0.5">Call Us</div>
+                  <div className="text-slate-900 text-sm font-extrabold">+1 (262) 399-2770</div>
+                  <div className="text-slate-400 text-[11px]">Mon - Sun, 8AM - 9PM CT</div>
+                </div>
+              </motion.a>
             </motion.div>
           </div>
         </div>

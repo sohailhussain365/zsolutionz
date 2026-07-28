@@ -10,8 +10,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import missionBg from "@/assets/customer inspired client.png";
-import aboutTechBg from "@/assets/about-tech.png";
-import { IsometricStack } from "@/components/isometric-graphic";
+
+import shape1 from "@/assets/Shape 1.png"; 
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 20 },
@@ -279,8 +279,11 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.3, ease: [0.22,1,0.36,1] }}
               className="relative hidden lg:block"
             >
-              <IsometricStack className="max-w-[560px] mx-auto animate-float-y" />
-
+<img
+    src={shape1}
+    alt="ZSolutionz connectivity illustration"
+    className="max-w-[600px] mx-auto animate-float-y"
+  />
               {/* Floating stat card */}
               <motion.div
                 initial={{ opacity: 0, y: -10 }}

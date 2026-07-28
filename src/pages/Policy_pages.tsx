@@ -5,11 +5,13 @@ import {
   Shield, Lock, FileText, Ban, ScrollText, PhoneOff,
   ArrowRight, AlertTriangle,
 } from "lucide-react";
+import policiesImg from "@/assets/ChatGPT Image Jul 27, 2026, 06_41_23 PM.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
+const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } };
 
 type PolicyKey = "privacy" | "refund" | "disclaimer" | "terms" | "dns" | "tcpa";
 
@@ -122,7 +124,7 @@ export default function PoliciesPage() {
     <div className="flex flex-col w-full overflow-x-hidden">
 
       {/* ══ HERO ════════════════════════════════════════════════ */}
-      <section className="relative flex items-center pb-10 pt-24 md:pb-14 md:pt-28 overflow-hidden bg-white">
+      <section className="relative bg-white overflow-hidden pt-20 lg:pt-24 pb-12 lg:pb-16">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div style={{ background: "radial-gradient(ellipse 60% 60% at 25% 25%, rgba(37,99,235,0.10) 0%, transparent 60%)" }} className="absolute inset-0" />
           <div style={{ background: "radial-gradient(ellipse 50% 55% at 80% 70%, rgba(56,189,248,0.08) 0%, transparent 60%)" }} className="absolute inset-0" />
@@ -131,65 +133,80 @@ export default function PoliciesPage() {
         </div>
 
         <div className="container relative z-10 mx-auto px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+
+            {/* LEFT — text, vertically centered to match image column */}
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col justify-center h-full">
+              <motion.div variants={fadeUp} className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-4">
                 <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
                 <span className="text-slate-300">/</span>
                 <span className="text-blue-500">Policies</span>
-              </div>
+              </motion.div>
 
-              <div className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-600 mb-6">
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-3 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-600 mb-4">
                 <Shield size={14} />
                 Transparency You Can Trust
-              </div>
+              </motion.div>
 
-              <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4"
-                style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
+              <motion.h1 variants={fadeUp} className="font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4"
+                style={{ fontSize: "clamp(2.1rem, 4vw, 3.5rem)" }}>
                 Clear Terms{" "}
                 <br />
                 <span className="gradient-text">
                   No Fine-Print Surprises.
                 </span>
-              </h1>
-              <p className="text-lg md:text-xl text-slate-500 max-w-xl leading-relaxed">
+              </motion.h1>
+              <motion.p variants={fadeUp} className="text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed">
                 Every policy that governs how we handle your data, your privacy, and your right to be contacted — laid out in plain language, all in one place.
-              </p>
+              </motion.p>
             </motion.div>
 
-            {/* Signature: fanned document / shield cluster */}
-            <div className="relative h-[300px] hidden lg:block">
-              <div style={{ background: "radial-gradient(circle, rgba(37,99,235,0.14) 0%, transparent 70%)" }}
-                className="absolute inset-0 blur-2xl" />
-              {[
-                { icon: Lock, rotate: -14, top: "10%", left: "8%", delay: 0 },
-                { icon: FileText, rotate: -4, top: "2%", left: "38%", delay: 0.2 },
-                { icon: ScrollText, rotate: 8, top: "14%", left: "62%", delay: 0.4 },
-                { icon: Ban, rotate: -8, top: "48%", left: "16%", delay: 0.6 },
-                { icon: PhoneOff, rotate: 12, top: "52%", left: "56%", delay: 0.8 },
-              ].map((c, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute h-16 w-16 rounded-2xl bg-blue-50 border border-blue-100 backdrop-blur-md flex items-center justify-center text-blue-600 shadow-lg"
-                  style={{ top: c.top, left: c.left, rotate: `${c.rotate}deg` }}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: [0, -10, 0] }}
-                  transition={{
-                    opacity: { duration: 0.6, delay: c.delay },
-                    y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: c.delay },
-                  }}
-                >
-                  <c.icon size={22} strokeWidth={1.5} />
-                </motion.div>
-              ))}
+            {/* RIGHT — image, same pattern as Home/Services/FAQ hero */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="relative hidden lg:flex items-center justify-center h-full"
+            >
+              <img
+                src={policiesImg}
+                alt="ZSolutionz policies and data protection illustration"
+                className="max-w-[500px] xl:max-w-[500px] h-[380px] padding-top-20px mx-auto animate-float-y"
+              />
+
+              {/* Floating badge — top right */}
               <motion.div
-                className="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-200 flex items-center justify-center"
-                animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+                className="absolute top-4 right-2 glass-card rounded-2xl px-5 py-4 flex items-center gap-3"
               >
-                <Shield size={30} className="text-blue-600" strokeWidth={1.5} />
+                <div className="h-10 w-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
+                  <Shield size={18} className="text-white" />
+                </div>
+                <div>
+                  <div className="text-slate-900 font-bold text-sm">Data Protected</div>
+                  <div className="text-slate-500 text-xs">Handled with care</div>
+                </div>
               </motion.div>
-            </div>
+
+              {/* Floating badge — bottom left */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1, duration: 0.6 }}
+                className="absolute bottom-2 left-0 glass-card rounded-2xl px-5 py-4 flex items-center gap-3"
+              >
+                <div className="h-10 w-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                  <Lock size={18} className="text-blue-600" />
+                </div>
+                <div>
+                  <div className="text-slate-900 font-bold text-sm">Plain Language</div>
+                  <div className="text-slate-500 text-xs">No fine print</div>
+                </div>
+              </motion.div>
+            </motion.div>
+
           </div>
         </div>
       </section>

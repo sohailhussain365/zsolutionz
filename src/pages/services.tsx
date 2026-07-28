@@ -34,85 +34,118 @@ const trustItems = [
   { icon: Lock, title: "Secure & Private", desc: "Your information is safe with us." },
 ];
 
+import servicelogo from "@/assets/Layer 2.png";
+
 export default function ServicesPage() {
   const [activeService, setActiveService] = useState<typeof services[number] | null>(null);
   const phoneNumber = "+12623992770";
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      <section className="relative bg-slate-50/60 pt-20 pb-14 md:pt-24 md:pb-16">
+
+      {/* ══ SERVICES HERO ═══════════════════════════════════════ */}
+      <section className="relative bg-white overflow-hidden pt-8 lg:pt-24 pb-8 lg:pb-10 min-h-screen lg:min-h-0 flex items-center">
+        {/* Layered background */}
+        <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-bl from-blue-50/70 via-blue-50/10 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
+
+        <div className="container mx-auto px-6 lg:px-16 relative z-10 w-full">
+          <motion.div initial="hidden" animate="visible" variants={stagger}>
+
+            {/* Breadcrumb */}
+            <motion.div variants={fadeUp} className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-3 lg:mb-4">
+              <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
+              <span className="text-slate-300">/</span>
+              <span className="text-blue-600 font-semibold">Services</span>
+            </motion.div>
+
+            {/* Badge */}
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-blue-50 px-3.5 py-1 text-xs sm:text-sm font-medium text-blue-600 mb-3 lg:mb-4">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse" />
+              Everything Under One Roof
+            </motion.div>
+
+            {/* Headline + intro + image */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center mb-6 lg:mb-8">
+
+              {/* LEFT — text */}
+              <div>
+                <motion.h1 variants={fadeUp}
+                  className="font-black text-slate-900 tracking-tight leading-[1.05] mb-3"
+                  style={{ fontSize: "clamp(1.9rem, 3.4vw, 2.75rem)" }}>
+                  Services You<br />Can <span className="text-blue-600">Compare</span>
+                </motion.h1>
+                <motion.p variants={fadeUp} className="text-slate-500 text-base lg:text-lg leading-relaxed max-w-md">
+                  ZSolutionz helps you compare top Internet, TV, Home Phone, and Mobile plans from trusted providers in one simple place.
+                </motion.p>
+              </div>
+
+              {/* RIGHT — image */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="relative hidden lg:block"
+              >
+                <img
+                  src={servicelogo}
+                  alt="ZSolutionz service comparison illustration"
+                  className="max-w-[380px] xl:max-w-[400px] mx-auto animate-float-y"
+                />
+              </motion.div>
+            </div>
+
+            {/* Quick stats */}
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-slate-200 py-4 lg:py-5">
+              {[
+                { icon: LayoutGrid, value: "15", label: "Core Services" },
+                { icon: Users, value: "10k+", label: "Customers Served" },
+                { icon: Award, value: "10+", label: "Years in Business" },
+              ].map((b, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-blue-100/70 flex items-center justify-center shrink-0">
+                    <b.icon size={18} className="text-blue-600" strokeWidth={2} />
+                  </div>
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-slate-900 text-base font-bold">{b.value}</span>
+                    <span className="text-slate-500 text-xs font-medium">{b.label}</span>
+                  </div>
+                  {i < 2 && <span className="hidden sm:block h-8 w-px bg-slate-200 ml-5" />}
+                </div>
+              ))}
+            </motion.div>
+
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══ SERVICE CARDS + TRUST ROW ═══════════════════════════ */}
+      <section className="relative bg-slate-50/60 pt-14 pb-14 md:pt-16 md:pb-16">
         <div className="container mx-auto px-6 lg:px-16">
 
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm font-medium text-slate-400 mb-5">
-            <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-blue-600 font-semibold">Services</span>
-          </div>
-
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-blue-50 px-3.5 py-1 text-xs sm:text-sm font-medium text-blue-600 mb-5">
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse" />
-            Everything Under One Roof
-          </div>
-
-          {/* Headline + intro */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-8">
-            <h1 className="font-black text-slate-900 tracking-tight leading-[1.05]"
-              style={{ fontSize: "clamp(2rem, 3.8vw, 3rem)" }}>
-              Services You<br />Can <span className="text-blue-600">Compare</span>
-            </h1>
-            <p className="text-slate-500 text-lg leading-relaxed lg:pt-2">
-              ZSolutionz helps you compare top Internet, TV, Home Phone, and Mobile plans from trusted providers in one simple place.
-            </p>
-          </div>
-
-          {/* Quick stats — fills the space between the intro and the service cards */}
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 border-y border-slate-200 py-5 mb-10">
-            {[
-              { icon: LayoutGrid, value: "4", label: "Core Services" },
-              { icon: Users, value: "500+", label: "Customers Served" },
-              { icon: Award, value: "10+", label: "Years in Business" },
-            ].map((b, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-blue-100/70 flex items-center justify-center shrink-0">
-                  <b.icon size={18} className="text-blue-600" strokeWidth={2} />
-                </div>
-                <div className="flex flex-col leading-tight">
-                  <span className="text-slate-900 text-base font-bold">{b.value}</span>
-                  <span className="text-slate-500 text-xs font-medium">{b.label}</span>
-                </div>
-                {i < 2 && <span className="hidden sm:block h-8 w-px bg-slate-200 ml-5" />}
-              </div>
-            ))}
-          </div>
-
-         
-
-{/* Service cards */}
-<motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-  {services.map((s, i) => {
-    const c = colorMap[s.color];
-    return (
-      <motion.div key={i} variants={fadeUp}
-        className={`group relative rounded-3xl ${c.bg} border-2 ${c.border} hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-8 text-center flex flex-col items-center`}>
-        <div className={`h-16 w-16 rounded-2xl ${c.iconBg} flex items-center justify-center text-white mb-6 shadow-lg shadow-black/10 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300`}>
-          <s.icon size={26} strokeWidth={2} />
-        </div>
-        <h3 className="text-lg font-extrabold text-slate-900 mb-2">{s.title}</h3>
-        <p className="text-sm text-slate-500 leading-relaxed mb-6">{s.desc}</p>
-        <button
-          type="button"
-          onClick={() => setActiveService(s)}
-          className={`inline-flex items-center gap-1.5 text-sm font-bold ${c.text} group-hover:gap-2.5 transition-all mt-auto`}>
-          Learn More <ArrowRight size={14} />
-        </button>
-      </motion.div>
-    );
-  })}
-</motion.div>
-
+          {/* Service cards */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {services.map((s, i) => {
+              const c = colorMap[s.color];
+              return (
+                <motion.div key={i} variants={fadeUp}
+                  className={`group relative rounded-3xl ${c.bg} border-2 ${c.border} hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-8 text-center flex flex-col items-center`}>
+                  <div className={`h-16 w-16 rounded-2xl ${c.iconBg} flex items-center justify-center text-white mb-6 shadow-lg shadow-black/10 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <s.icon size={26} strokeWidth={2} />
+                  </div>
+                  <h3 className="text-lg font-extrabold text-slate-900 mb-2">{s.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed mb-6">{s.desc}</p>
+                  <button
+                    type="button"
+                    onClick={() => setActiveService(s)}
+                    className={`inline-flex items-center gap-1.5 text-sm font-bold ${c.text} group-hover:gap-2.5 transition-all mt-auto`}>
+                    Learn More <ArrowRight size={14} />
+                  </button>
+                </motion.div>
+              );
+            })}
+          </motion.div>
 
           {/* Trust row */}
           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
